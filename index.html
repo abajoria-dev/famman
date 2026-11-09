@@ -39,7 +39,6 @@
     .header-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .app-title { font-size: 1.3rem; font-weight: 700; margin: 0; }
     .header-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-    .pill { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; }
     .role-badge { background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 12px; font-size: 0.78rem; font-weight: 700; }
 
     .controls { max-width: 1100px; margin: 14px auto; padding: 0 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
@@ -182,17 +181,14 @@
   </div>
 
 <script>
-  // ============================================================================
-  // PASTE YOUR FIREBASE CONFIG HERE:
-  // ============================================================================
   const firebaseConfig = {
-  apiKey: "AIzaSyAM_9u6z0cntZL4V18xxOAusQR204yRao4",
-  authDomain: "famman-2026.firebaseapp.com",
-  projectId: "famman-2026",
-  storageBucket: "famman-2026.firebasestorage.app",
-  messagingSenderId: "988619839051",
-  appId: "1:988619839051:web:ec5bbcf9c0a833daa91fce",
-  measurementId: "G-FKH4WPMWXV"
+    apiKey: "AIzaSyAM_9u6z0cntZL4V18xx0AusQR204yRao4",
+    authDomain: "famman-2026.firebaseapp.com",
+    projectId: "famman-2026",
+    storageBucket: "famman-2026.firebasestorage.app",
+    messagingSenderId: "988619839051",
+    appId: "1:988619839051:web:ec5bbcf9c0a833daa91fce",
+    measurementId: "G-FKH4PMWXV"
   };
 
   firebase.initializeApp(firebaseConfig);
@@ -243,7 +239,6 @@
       });
 
       if (!found) {
-        // Create default family branch if none exist for user
         CURRENT_FAMILY_ID = "bajoria_mool";
         createDefaultFamily(email);
       } else {
@@ -299,7 +294,6 @@
   }
 
   function renderAll() {
-    // 1. Lineage
     document.getElementById('lineageView').innerHTML = (ACTIVE_FAMILY_DATA.members || []).map(m => `
       <div class="card">
         <div>
@@ -316,7 +310,6 @@
       </div>
     `).join('');
 
-    // 2. Utsavs
     document.getElementById('utsavView').innerHTML = (ACTIVE_FAMILY_DATA.utsavs || []).map(u => `
       <div class="card">
         <div>
@@ -329,7 +322,6 @@
       </div>
     `).join('');
 
-    // 3. Tyohars
     document.getElementById('tyoharView').innerHTML = (ACTIVE_FAMILY_DATA.tyohars || []).map(t => `
       <div class="card">
         <div>
@@ -391,7 +383,7 @@
   }
 
   function generateInviteLink() {
-    const inviteCode = Math.random().toString(36.substring(2, 9));
+    const inviteCode = Math.random().toString(36).substring(2, 9);
     prompt("Copy this private family invite link to share with relatives:", window.location.origin + window.location.pathname + "?tenant=" + CURRENT_FAMILY_ID + "&invite=" + inviteCode);
   }
 </script>
