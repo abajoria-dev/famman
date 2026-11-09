@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>KulVansh & Utsav Manager</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#a8380b">
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <style>
+    :root {
+      --saffron: #d9531e; --saffron-dark: #a8380b; --marigold: #f59e0b;
+      --cream: #fffaf3; --card: #ffffff; --text: #2c1810; --muted: #6e5549;
+      --border: #f0dfcc; --green: #15803d; --danger: #dc2626;
+    }
+    * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    body { margin: 0; background: var(--cream); color: var(--text); padding-bottom: 80px; }
+    
+    #authScreen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 20px; background: var(--cream);
+    }
+    .auth-box {
+      background: white; padding: 32px 24px; border-radius: 16px; border: 1px solid var(--border);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06); max-width: 400px; width: 100%; text-align: center;
+    }
+    .google-btn {
+      background: #fff; border: 1px solid #cbd5e1; color: #1e293b; padding: 12px 16px;
+      border-radius: 10px; font-weight: 600; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; gap: 10px; width: 100%; font-size: 0.95rem; margin-top: 18px;
+    }
+    .google-btn:hover { background: #f8fafc; }
+
+    header {
+      background: linear-gradient(135deg, var(--saffron-dark), var(--saffron));
+      color: white; padding: 16px 20px; box-shadow: 0 3px 12px rgba(168, 56, 11, 0.25);
+    }
+    .header-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .app-title { font-size: 1.3rem; font-weight: 700; margin: 0; }
+    .header-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .pill { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; }
+    .role-badge { background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 12px; font-size: 0.78rem; font-weight: 700; }
+
+    .controls { max-width: 1100px; margin: 14px auto; padding: 0 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .tabs { display: flex; gap: 6px; background: #f3e5d5; padding: 4px; border-radius: 10px; flex-wrap: wrap; }
+    .tab-btn { border: none; background: transparent; padding: 8px 12px; border-radius: 8px; font-weight: 600; color: var(--muted); cursor: pointer; font-size: 0.85rem; }
+    .tab-btn.active { background: var(--card); color: var(--saffron-dark); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    
+    select, input, textarea { padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.88rem; background: white; width: 100%; }
+    .btn { background: var(--saffron); color: white; border: none; padding: 8px 13px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
+    .btn-outline { background: transparent; color: var(--saffron-dark); border: 1px solid var(--saffron); }
+    .btn-danger { background: transparent; color: var(--danger); border: 1px solid #fecaca; }
+    .btn-sm { padding: 4px 9px; font-size: 0.76rem; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-left: 5px solid var(--saffron); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; }
+    .badge { display: inline-block; background: #fff3e0; color: var(--saffron-dark); font-size: 0.74rem; font-weight: 700; padding: 3px 8px; border-radius: 10px; margin-bottom: 6px; }
+    .card-title { font-size: 1.1rem; font-weight: 700; margin: 4px 0 6px 0; }
+    .meta-text { font-size: 0.85rem; color: var(--muted); line-height: 1.45; }
+    .nested-box { background: #fdf8f2; border-left: 3px solid var(--marigold); padding: 8px 10px; font-size: 0.82rem; border-radius: 4px; margin-top: 8px; }
+
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); align-items: center; justify-content: center; z-index: 100; padding: 16px; }
+    .modal { background: white; border-radius: 14px; max-width: 500px; width: 100%; padding: 20px; max-height: 90vh; overflow-y: auto; }
+    .form-group { margin-bottom: 10px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 3px; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Invite-Only Google Login Screen -->
+  <div id="authScreen">
+    <div class="auth-box">
+      <div style="font-size: 2.2rem;">🌳</div>
+      <h2 style="margin: 8px 0 4px; color: var(--saffron-dark);">KulVansh & Utsav Hub</h2>
+      <p style="font-size: 0.86rem; color: var(--muted); margin: 0;">Private Family Lineage, Janma Nakshatra, Rasoi & Sanskar Manager (Vikram Samvat Aligned)</p>
+      <button class="google-btn" onclick="signInWithGoogle()">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.16 21.32 7.21 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.18C.43 8.13 0 9.87 0 11.7s.43 3.57 1.18 5.09l4.09-2.55z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.21 0 3.16 2.68 1.18 6.61l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
+        Continue with Google
+      </button>
+      <div id="authError" style="color: var(--danger); font-size: 0.82rem; margin-top: 14px; font-weight: 600;"></div>
+    </div>
+  </div>
+
+  <!-- 2. Main App Dashboard -->
+  <div id="appContent" style="display:none;">
+    <header>
+      <div class="header-top">
+        <div>
+          <h1 class="app-title">🌳 KulVansh & Utsav Manager</h1>
+          <div style="font-size: 0.8rem; opacity: 0.9;" id="samvatBanner">Vikram Samvat 2083</div>
+        </div>
+        <div class="header-meta">
+          <span class="role-badge" id="roleBadge">Family Member</span>
+          <button class="btn btn-outline btn-sm" style="color:white; border-color:rgba(255,255,255,0.5);" onclick="signOutUser()">Sign Out</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="controls">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('lineage', this)">🌿 Vansh & Nakshatra</button>
+        <button class="tab-btn" onclick="switchTab('utsav', this)">🎉 Sanskar & Utsav (Shaadi/Mundan)</button>
+        <button class="tab-btn" onclick="switchTab('tyohar', this)">🪔 Tyohar & Rasoi</button>
+      </div>
+      <div id="adminControls" style="display:none; gap:8px;">
+        <button class="btn" onclick="openModal('member')">+ Member</button>
+        <button class="btn" onclick="openModal('utsav')">+ Utsav</button>
+        <button class="btn" onclick="openModal('tyohar')">+ Tyohar & Rasoi</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="lineageView" class="grid"></div>
+      <div id="utsavView" class="grid" style="display:none;"></div>
+      <div id="tyoharView" class="grid" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit Family Member -->
+  <div class="modal-backdrop" id="memberModal">
+    <div class="modal">
+      <h3 style="margin-top:0;">🌿 Family Lineage & Janma Nakshatra</h3>
+      <input type="hidden" id="m_id">
+      <div class="form-group"><label>Full Name</label><input type="text" id="m_name" placeholder="Name"></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+        <div class="form-group"><label>Generation / Relation</label><input type="text" id="m_branch" placeholder="e.g., Self / Son / Daughter"></div>
+        <div class="form-group"><label>Gotra</label><input type="text" id="m_gotra" placeholder="Gotra"></div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+        <div class="form-group"><label>Gregorian DOB</label><input type="date" id="m_dob"></div>
+        <div class="form-group"><label>Janma Rashi</label><input type="text" id="m_rashi" placeholder="e.g., Kumbha / Simha"></div>
+      </div>
+      <div style="display:grid; grid-template-columns:2fr 1fr; gap:8px;">
+        <div class="form-group"><label>Janma Nakshatra</label><input type="text" id="m_nakshatra" placeholder="e.g., Shatabhisha / Rohini"></div>
+        <div class="form-group"><label>Pada</label><input type="text" id="m_pada" placeholder="Pada 1-4"></div>
+      </div>
+      <div class="form-group"><label>Hindu Tithi Birthday (Masa + Paksha + Tithi)</label><input type="text" id="m_tithi" placeholder="e.g., Pausha Krishna Dwadashi"></div>
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
+        <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+        <button class="btn" onclick="saveMember()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit Sanskar / Utsav -->
+  <div class="modal-backdrop" id="utsavModal">
+    <div class="modal">
+      <h3 style="margin-top:0;">🎉 Sanskar / Family Utsav (Shaadi, Mundan, Puja)</h3>
+      <input type="hidden" id="u_id">
+      <div class="form-group">
+        <label>Sanskar Category</label>
+        <select id="u_type">
+          <option>Vivah / Shaadi</option><option>Mundan Sanskar</option><option>Annaprashan</option>
+          <option>Upanayana / Janeu</option><option>Griha Pravesh</option><option>Janmadin / Tithi Utsav</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Event Title</label><input type="text" id="u_title" placeholder="Event Name"></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+        <div class="form-group"><label>Gregorian Date</label><input type="date" id="u_date"></div>
+        <div class="form-group"><label>Vikram Samvat Tithi / Muhurat</label><input type="text" id="u_tithi" placeholder="e.g., VS 2083 Magha Shukla Panchami"></div>
+      </div>
+      <div class="form-group"><label>Venue & Location</label><input type="text" id="u_venue" placeholder="Hall / Home Mandir"></div>
+      <div class="form-group"><label>Rasoi Menu, Samagri & Guest Notes</label><textarea id="u_notes" rows="3"></textarea></div>
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
+        <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+        <button class="btn" onclick="saveUtsav()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit Tyohar & Rasoi -->
+  <div class="modal-backdrop" id="tyoharModal">
+    <div class="modal">
+      <h3 style="margin-top:0;">🪔 Tyohar & Satvik Rasoi</h3>
+      <input type="hidden" id="t_id">
+      <div class="form-group"><label>Tyohar Name</label><input type="text" id="t_name" placeholder="e.g., Govardhan Puja / Annakut"></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+        <div class="form-group"><label>Hindu Masa & Paksha</label><input type="text" id="t_masa" placeholder="e.g., Kartika Shukla"></div>
+        <div class="form-group"><label>Tithi</label><input type="text" id="t_tithi" placeholder="e.g., Pratipada"></div>
+      </div>
+      <div class="form-group"><label>Gregorian Date</label><input type="date" id="t_date"></div>
+      <div class="form-group"><label>Rasoi Dishes & Ingredients</label><textarea id="t_rasoi" rows="3" placeholder="e.g., Annakut Mix Veg, Bajra Khichdi, Kesar Kheer..."></textarea></div>
+      <div class="form-group"><label>Puja Samagri</label><textarea id="t_samagri" rows="2" placeholder="Diyas, Tulsi dal, Roli, Akshat..."></textarea></div>
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
+        <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
+        <button class="btn" onclick="saveTyohar()">Save</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ============================================================================
+  // PASTE YOUR FIREBASE CONFIG FROM STEP 1 RIGHT HERE:
+  // ============================================================================
+  const firebaseConfig = {
+  apiKey: "AIzaSyAM_9u6z0cntZL4V18xxOAusQR204yRao4",
+  authDomain: "famman-2026.firebaseapp.com",
+  projectId: "famman-2026",
+  storageBucket: "famman-2026.firebasestorage.app",
+  messagingSenderId: "988619839051",
+  appId: "1:988619839051:web:ec5bbcf9c0a833daa91fce"
+  };
+
+  // ============================================================================
+  // ADD YOUR ADMIN EMAIL(S) IN LOWERCASE (Must match Firestore Rules in Step 3):
+  // ============================================================================
+  const ADMIN_EMAILS = [
+    "abajoria.mca@gmail.com",
+    "aprajitalove08@gmail.com"
+  ];
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const docRef = db.collection("kulvansh").doc("family_hub");
+
+  let STATE = { members: [], utsavs: [], tyohars: [] };
+  let IS_ADMIN = false;
+
+  // Compute Vikram Samvat Year dynamically (Gregorian Year + 57)
+  const now = new Date();
+  const vsYear = now.getFullYear() + 57;
+  document.getElementById('samvatBanner').innerText = `Vikram Samvat ${vsYear} • Live Family Cloud`;
+
+  function signInWithGoogle() {
+    document.getElementById('authError').innerText = '';
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).catch(err => {
+      document.getElementById('authError').innerText = err.message;
+    });
+  }
+
+  function signOutUser() { auth.signOut(); }
+
+  auth.onAuthStateChanged(user => {
+    if (!user) {
+      document.getElementById('authScreen').style.display = 'flex';
+      document.getElementById('appContent').style.display = 'none';
+      return;
+    }
+
+    IS_ADMIN = ADMIN_EMAILS.includes((user.email || '').toLowerCase());
+
+    // Listen to real-time updates from Firestore; if server rules block the user, sign them out immediately
+    docRef.onSnapshot(doc => {
+      document.getElementById('authScreen').style.display = 'none';
+      document.getElementById('appContent').style.display = 'block';
+      document.getElementById('roleBadge').innerText = IS_ADMIN ? `🛡️ Admin (${user.email})` : `👤 Member (${user.email})`;
+      document.getElementById('adminControls').style.display = IS_ADMIN ? 'flex' : 'none';
+
+      if (doc.exists) {
+        STATE = doc.data();
+      } else if (IS_ADMIN) {
+        STATE = {
+          members: [
+            { id: 'M1', name: 'Aditya Bajoria', branch: 'Karta / Self', gotra: 'Kasyapa', dob: '1987-12-27', rashi: 'Kumbha', nakshatra: 'Shatabhisha', pada: 'Pada 3', tithi: 'Pausha Shukla Saptami (VS 2044)' }
+          ],
+          utsavs: [
+            { id: 'U1', type: 'Mundan Sanskar', title: 'Family Mundan Utsav', date: '2027-03-15', tithi: 'Phalguna Shukla Saptami', venue: 'Home Mandir & Banquet', notes: 'Satvik Bhojan, Ganesh Pujan at 9:30 AM' }
+          ],
+          tyohars: [
+            { id: 'T1', name: 'Govardhan Puja / Annakut', masa: 'Kartika Shukla', tithi: 'Pratipada', date: '2026-11-10', rasoi: 'Annakut Mix Veg Sabzi, Bajra Khichdi, Kheer, Poori', samagri: 'Tulsi dal, Govardhan Pooja Thali, Ghee Diyas' },
+            { id: 'T2', name: 'Bhai Dooj / Yama Dwitiya', masa: 'Kartika Shukla', tithi: 'Dwitiya', date: '2026-11-11', rasoi: 'Kaju Katli, Dry Fruit Kachori, Satvik Thali', samagri: 'Roli, Akshat, Dry Coconut (Gola), Paan' }
+          ]
+        };
+        docRef.set(STATE);
+      }
+      renderAll();
+    }, err => {
+      // Triggered when Firestore Server Security Rules reject an uninvited email
+      document.getElementById('authError').innerText = `Access Restricted: ${user.email} is not on the family invite whitelist.`;
+      auth.signOut();
+    });
+  });
+
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('lineageView').style.display = tab === 'lineage' ? 'grid' : 'none';
+    document.getElementById('utsavView').style.display = tab === 'utsav' ? 'grid' : 'none';
+    document.getElementById('tyoharView').style.display = tab === 'tyohar' ? 'grid' : 'none';
+  }
+
+  function renderAll() {
+    // 1. Lineage
+    const lBox = document.getElementById('lineageView');
+    lBox.innerHTML = (STATE.members || []).map(m => `
+      <div class="card">
+        <div>
+          <span class="badge">🌿 ${m.branch} • Gotra: ${m.gotra || '-'}</span>
+          <h3 class="card-title">👤 ${m.name}</h3>
+          <div class="meta-text">
+            📅 <strong>Gregorian DOB:</strong> ${m.dob || '-'}<br>
+            ✨ <strong>Nakshatra:</strong> ${m.nakshatra || '-'} (${m.pada || '-'})<br>
+            🌙 <strong>Rashi:</strong> ${m.rashi || '-'}<br>
+            🕉️ <strong>Tithi Janmadin:</strong> ${m.tithi || '-'}
+          </div>
+        </div>
+        ${IS_ADMIN ? `<div style="margin-top:10px; text-align:right;"><button class="btn btn-danger btn-sm" onclick="removeItem('members','${m.id}')">🗑️ Delete</button></div>` : ''}
+      </div>
+    `).join('');
+
+    // 2. Utsavs
+    const uBox = document.getElementById('utsavView');
+    uBox.innerHTML = (STATE.utsavs || []).map(u => `
+      <div class="card">
+        <div>
+          <span class="badge">🎉 ${u.type}</span>
+          <h3 class="card-title">${u.title}</h3>
+          <div class="meta-text">
+            📅 <strong>Date:</strong> ${u.date} • 🕉️ ${u.tithi || ''}<br>
+            📍 <strong>Venue:</strong> ${u.venue || '-'}
+          </div>
+          ${u.notes ? `<div class="nested-box"><strong>Rasoi & Rituals:</strong> ${u.notes}</div>` : ''}
+        </div>
+        ${IS_ADMIN ? `<div style="margin-top:10px; text-align:right;"><button class="btn btn-danger btn-sm" onclick="removeItem('utsavs','${u.id}')">🗑️ Delete</button></div>` : ''}
+      </div>
+    `).join('');
+
+    // 3. Tyohar & Rasoi
+    const tBox = document.getElementById('tyoharView');
+    tBox.innerHTML = (STATE.tyohars || []).map(t => `
+      <div class="card">
+        <div>
+          <span class="badge">🪔 ${t.masa} • ${t.tithi}</span>
+          <h3 class="card-title">${t.name}</h3>
+          <div class="meta-text">📅 <strong>Gregorian Date:</strong> ${t.date || '-'}</div>
+          ${t.rasoi ? `<div class="nested-box"><strong>🍲 Planned Rasoi & Ingredients:</strong><br>${t.rasoi}</div>` : ''}
+          ${t.samagri ? `<div class="nested-box"><strong>🪔 Puja Samagri:</strong><br>${t.samagri}</div>` : ''}
+        </div>
+        ${IS_ADMIN ? `<div style="margin-top:10px; text-align:right;"><button class="btn btn-danger btn-sm" onclick="removeItem('tyohars','${t.id}')">🗑️ Delete</button></div>` : ''}
+      </div>
+    `).join('');
+  }
+
+  function openModal(type) {
+    document.getElementById(type + 'Modal').style.display = 'flex';
+  }
+  function closeModals() {
+    document.querySelectorAll('.modal-backdrop').forEach(m => m.style.display = 'none');
+  }
+
+  function saveMember() {
+    STATE.members = STATE.members || [];
+    STATE.members.push({
+      id: 'M' + Date.now(),
+      name: document.getElementById('m_name').value,
+      branch: document.getElementById('m_branch').value,
+      gotra: document.getElementById('m_gotra').value,
+      dob: document.getElementById('m_dob').value,
+      rashi: document.getElementById('m_rashi').value,
+      nakshatra: document.getElementById('m_nakshatra').value,
+      pada: document.getElementById('m_pada').value,
+      tithi: document.getElementById('m_tithi').value
+    });
+    docRef.set(STATE);
+    closeModals();
+  }
+
+  function saveUtsav() {
+    STATE.utsavs = STATE.utsavs || [];
+    STATE.utsavs.push({
+      id: 'U' + Date.now(),
+      type: document.getElementById('u_type').value,
+      title: document.getElementById('u_title').value,
+      date: document.getElementById('u_date').value,
+      tithi: document.getElementById('u_tithi').value,
+      venue: document.getElementById('u_venue').value,
+      notes: document.getElementById('u_notes').value
+    });
+    docRef.set(STATE);
+    closeModals();
+  }
+
+  function saveTyohar() {
+    STATE.tyohars = STATE.tyohars || [];
+    STATE.tyohars.push({
+      id: 'T' + Date.now(),
+      name: document.getElementById('t_name').value,
+      masa: document.getElementById('t_masa').value,
+      tithi: document.getElementById('t_tithi').value,
+      date: document.getElementById('t_date').value,
+      rasoi: document.getElementById('t_rasoi').value,
+      samagri: document.getElementById('t_samagri').value
+    });
+    docRef.set(STATE);
+    closeModals();
+  }
+
+  function removeItem(collectionKey, id) {
+    if (!confirm('Remove this entry?')) return;
+    STATE[collectionKey] = (STATE[collectionKey] || []).filter(x => x.id !== id);
+    docRef.set(STATE);
+  }
+</script>
+</body>
+</html>
