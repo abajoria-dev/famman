@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>KulVansh & Utsav Manager</title>
+  <title>KulVansh & Utsav - Multi-Family Hub</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#a8380b">
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -19,12 +19,11 @@
     body { margin: 0; background: var(--cream); color: var(--text); padding-bottom: 80px; }
     
     #authScreen {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; padding: 20px; background: var(--cream);
+      display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; background: var(--cream);
     }
     .auth-box {
       background: white; padding: 32px 24px; border-radius: 16px; border: 1px solid var(--border);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06); max-width: 400px; width: 100%; text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06); max-width: 420px; width: 100%; text-align: center;
     }
     .google-btn {
       background: #fff; border: 1px solid #cbd5e1; color: #1e293b; padding: 12px 16px;
@@ -70,12 +69,12 @@
 </head>
 <body>
 
-  <!-- 1. Invite-Only Google Login Screen -->
+  <!-- Google Auth Screen -->
   <div id="authScreen">
     <div class="auth-box">
       <div style="font-size: 2.2rem;">🌳</div>
       <h2 style="margin: 8px 0 4px; color: var(--saffron-dark);">KulVansh & Utsav Hub</h2>
-      <p style="font-size: 0.86rem; color: var(--muted); margin: 0;">Private Family Lineage, Janma Nakshatra, Rasoi & Sanskar Manager (Vikram Samvat Aligned)</p>
+      <p style="font-size: 0.86rem; color: var(--muted); margin: 0;">Multi-Family Tenant & Lineage Hub (Vikram Samvat Aligned)</p>
       <button class="google-btn" onclick="signInWithGoogle()">
         <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.16 21.32 7.21 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.18C.43 8.13 0 9.87 0 11.7s.43 3.57 1.18 5.09l4.09-2.55z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.21 0 3.16 2.68 1.18 6.61l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
         Continue with Google
@@ -84,7 +83,7 @@
     </div>
   </div>
 
-  <!-- 2. Main App Dashboard -->
+  <!-- Main Multi-Family Dashboard -->
   <div id="appContent" style="display:none;">
     <header>
       <div class="header-top">
@@ -93,7 +92,8 @@
           <div style="font-size: 0.8rem; opacity: 0.9;" id="samvatBanner">Vikram Samvat 2083</div>
         </div>
         <div class="header-meta">
-          <span class="role-badge" id="roleBadge">Family Member</span>
+          <select id="familyTenantSelect" onchange="switchFamilyTenant(this.value)" style="padding:4px 8px; border-radius:6px; font-size:0.82rem;"></select>
+          <span class="role-badge" id="roleBadge">Member</span>
           <button class="btn btn-outline btn-sm" style="color:white; border-color:rgba(255,255,255,0.5);" onclick="signOutUser()">Sign Out</button>
         </div>
       </div>
@@ -101,14 +101,15 @@
 
     <div class="controls">
       <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('lineage', this)">🌿 Vansh & Nakshatra</button>
-        <button class="tab-btn" onclick="switchTab('utsav', this)">🎉 Sanskar & Utsav (Shaadi/Mundan)</button>
-        <button class="tab-btn" onclick="switchTab('tyohar', this)">🪔 Tyohar & Rasoi</button>
+        <button class="tab-btn active" onclick="switchTab('lineage', this)">🌿 Family Vansh & Nakshatra</button>
+        <button class="tab-btn" onclick="switchTab('utsav', this)">🎉 Sanskar & Utsav</button>
+        <button class="tab-btn" onclick="switchTab('tyohar', this)">🪔 Tyohar & Traditions</button>
       </div>
-      <div id="adminControls" style="display:none; gap:8px;">
+      <div id="adminControls" style="display:none; gap:6px; flex-wrap:wrap;">
         <button class="btn" onclick="openModal('member')">+ Member</button>
         <button class="btn" onclick="openModal('utsav')">+ Utsav</button>
-        <button class="btn" onclick="openModal('tyohar')">+ Tyohar & Rasoi</button>
+        <button class="btn" onclick="openModal('tyohar')">+ Tyohar</button>
+        <button class="btn btn-outline" style="background:#fff;" onclick="generateInviteLink()">🔗 Private Invite Link</button>
       </div>
     </div>
 
@@ -119,25 +120,24 @@
     </div>
   </div>
 
-  <!-- Modal: Add/Edit Family Member -->
+  <!-- Modals -->
   <div class="modal-backdrop" id="memberModal">
     <div class="modal">
-      <h3 style="margin-top:0;">🌿 Family Lineage & Janma Nakshatra</h3>
-      <input type="hidden" id="m_id">
+      <h3 style="margin-top:0;">🌿 Add Family Lineage Member</h3>
       <div class="form-group"><label>Full Name</label><input type="text" id="m_name" placeholder="Name"></div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-        <div class="form-group"><label>Generation / Relation</label><input type="text" id="m_branch" placeholder="e.g., Self / Son / Daughter"></div>
+        <div class="form-group"><label>Branch / Khandan</label><input type="text" id="m_branch" placeholder="Branch"></div>
         <div class="form-group"><label>Gotra</label><input type="text" id="m_gotra" placeholder="Gotra"></div>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
         <div class="form-group"><label>Gregorian DOB</label><input type="date" id="m_dob"></div>
-        <div class="form-group"><label>Janma Rashi</label><input type="text" id="m_rashi" placeholder="e.g., Kumbha / Simha"></div>
+        <div class="form-group"><label>Janma Rashi</label><input type="text" id="m_rashi" placeholder="Rashi"></div>
       </div>
       <div style="display:grid; grid-template-columns:2fr 1fr; gap:8px;">
-        <div class="form-group"><label>Janma Nakshatra</label><input type="text" id="m_nakshatra" placeholder="e.g., Shatabhisha / Rohini"></div>
+        <div class="form-group"><label>Janma Nakshatra</label><input type="text" id="m_nakshatra" placeholder="Nakshatra"></div>
         <div class="form-group"><label>Pada</label><input type="text" id="m_pada" placeholder="Pada 1-4"></div>
       </div>
-      <div class="form-group"><label>Hindu Tithi Birthday (Masa + Paksha + Tithi)</label><input type="text" id="m_tithi" placeholder="e.g., Pausha Krishna Dwadashi"></div>
+      <div class="form-group"><label>Hindu Tithi Birthday</label><input type="text" id="m_tithi" placeholder="Tithi"></div>
       <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
         <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
         <button class="btn" onclick="saveMember()">Save</button>
@@ -145,25 +145,17 @@
     </div>
   </div>
 
-  <!-- Modal: Add/Edit Sanskar / Utsav -->
   <div class="modal-backdrop" id="utsavModal">
     <div class="modal">
-      <h3 style="margin-top:0;">🎉 Sanskar / Family Utsav (Shaadi, Mundan, Puja)</h3>
-      <input type="hidden" id="u_id">
-      <div class="form-group">
-        <label>Sanskar Category</label>
-        <select id="u_type">
-          <option>Vivah / Shaadi</option><option>Mundan Sanskar</option><option>Annaprashan</option>
-          <option>Upanayana / Janeu</option><option>Griha Pravesh</option><option>Janmadin / Tithi Utsav</option>
-        </select>
-      </div>
-      <div class="form-group"><label>Event Title</label><input type="text" id="u_title" placeholder="Event Name"></div>
+      <h3 style="margin-top:0;">🎉 Schedule Sanskar / Utsav</h3>
+      <div class="form-group"><label>Category</label><select id="u_type"><option>Vivah / Shaadi</option><option>Mundan Sanskar</option><option>Griha Pravesh</option><option>Satyanarayan Puja</option></select></div>
+      <div class="form-group"><label>Event Title</label><input type="text" id="u_title" placeholder="Title"></div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
         <div class="form-group"><label>Gregorian Date</label><input type="date" id="u_date"></div>
-        <div class="form-group"><label>Vikram Samvat Tithi / Muhurat</label><input type="text" id="u_tithi" placeholder="e.g., VS 2083 Magha Shukla Panchami"></div>
+        <div class="form-group"><label>Hindu Tithi / Muhurat</label><input type="text" id="u_tithi" placeholder="Tithi"></div>
       </div>
-      <div class="form-group"><label>Venue & Location</label><input type="text" id="u_venue" placeholder="Hall / Home Mandir"></div>
-      <div class="form-group"><label>Rasoi Menu, Samagri & Guest Notes</label><textarea id="u_notes" rows="3"></textarea></div>
+      <div class="form-group"><label>Venue</label><input type="text" id="u_venue" placeholder="Venue"></div>
+      <div class="form-group"><label>Rasoi & Ritual Notes</label><textarea id="u_notes" rows="3"></textarea></div>
       <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
         <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
         <button class="btn" onclick="saveUtsav()">Save</button>
@@ -171,19 +163,17 @@
     </div>
   </div>
 
-  <!-- Modal: Add/Edit Tyohar & Rasoi -->
   <div class="modal-backdrop" id="tyoharModal">
     <div class="modal">
-      <h3 style="margin-top:0;">🪔 Tyohar & Satvik Rasoi</h3>
-      <input type="hidden" id="t_id">
-      <div class="form-group"><label>Tyohar Name</label><input type="text" id="t_name" placeholder="e.g., Govardhan Puja / Annakut"></div>
+      <h3 style="margin-top:0;">🪔 Add Family Tyohar & Tradition</h3>
+      <div class="form-group"><label>Tyohar Name</label><input type="text" id="t_name" placeholder="Name"></div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-        <div class="form-group"><label>Hindu Masa & Paksha</label><input type="text" id="t_masa" placeholder="e.g., Kartika Shukla"></div>
-        <div class="form-group"><label>Tithi</label><input type="text" id="t_tithi" placeholder="e.g., Pratipada"></div>
+        <div class="form-group"><label>Hindu Masa & Paksha</label><input type="text" id="t_masa" placeholder="Masa"></div>
+        <div class="form-group"><label>Tithi</label><input type="text" id="t_tithi" placeholder="Tithi"></div>
       </div>
       <div class="form-group"><label>Gregorian Date</label><input type="date" id="t_date"></div>
-      <div class="form-group"><label>Rasoi Dishes & Ingredients</label><textarea id="t_rasoi" rows="3" placeholder="e.g., Annakut Mix Veg, Bajra Khichdi, Kesar Kheer..."></textarea></div>
-      <div class="form-group"><label>Puja Samagri</label><textarea id="t_samagri" rows="2" placeholder="Diyas, Tulsi dal, Roli, Akshat..."></textarea></div>
+      <div class="form-group"><label>Family Rasoi Menu</label><textarea id="t_rasoi" rows="3" placeholder="Dishes"></textarea></div>
+      <div class="form-group"><label>Puja Samagri</label><textarea id="t_samagri" rows="2" placeholder="Samagri"></textarea></div>
       <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
         <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
         <button class="btn" onclick="saveTyohar()">Save</button>
@@ -193,7 +183,7 @@
 
 <script>
   // ============================================================================
-  // PASTE YOUR FIREBASE CONFIG FROM STEP 1 RIGHT HERE:
+  // PASTE YOUR FIREBASE CONFIG HERE:
   // ============================================================================
   const firebaseConfig = {
   apiKey: "AIzaSyAM_9u6z0cntZL4V18xxOAusQR204yRao4",
@@ -204,29 +194,18 @@
   appId: "1:988619839051:web:ec5bbcf9c0a833daa91fce"
   };
 
-  // ============================================================================
-  // ADD YOUR ADMIN EMAIL(S) IN LOWERCASE (Must match Firestore Rules in Step 3):
-  // ============================================================================
-  const ADMIN_EMAILS = [
-    "abajoria.mca@gmail.com",
-    "aprajitalove08@gmail.com"
-  ];
-
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
   const db = firebase.firestore();
-  const docRef = db.collection("kulvansh").doc("family_hub");
 
-  let STATE = { members: [], utsavs: [], tyohars: [] };
-  let IS_ADMIN = false;
+  let CURRENT_FAMILY_ID = "bajoria_mool";
+  let ACTIVE_FAMILY_DATA = { members: [], utsavs: [], tyohars: [] };
+  let IS_KARTA = false;
 
-  // Compute Vikram Samvat Year dynamically (Gregorian Year + 57)
   const now = new Date();
-  const vsYear = now.getFullYear() + 57;
-  document.getElementById('samvatBanner').innerText = `Vikram Samvat ${vsYear} • Live Family Cloud`;
+  document.getElementById('samvatBanner').innerText = `Vikram Samvat ${now.getFullYear() + 57} • Multi-Tenant Hub`;
 
   function signInWithGoogle() {
-    document.getElementById('authError').innerText = '';
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider).catch(err => {
       document.getElementById('authError').innerText = err.message;
@@ -241,40 +220,74 @@
       document.getElementById('appContent').style.display = 'none';
       return;
     }
-
-    IS_ADMIN = ADMIN_EMAILS.includes((user.email || '').toLowerCase());
-
-    // Listen to real-time updates from Firestore; if server rules block the user, sign them out immediately
-    docRef.onSnapshot(doc => {
-      document.getElementById('authScreen').style.display = 'none';
-      document.getElementById('appContent').style.display = 'block';
-      document.getElementById('roleBadge').innerText = IS_ADMIN ? `🛡️ Admin (${user.email})` : `👤 Member (${user.email})`;
-      document.getElementById('adminControls').style.display = IS_ADMIN ? 'flex' : 'none';
-
-      if (doc.exists) {
-        STATE = doc.data();
-      } else if (IS_ADMIN) {
-        STATE = {
-          members: [
-            { id: 'M1', name: 'Aditya Bajoria', branch: 'Karta / Self', gotra: 'Kasyapa', dob: '1987-12-27', rashi: 'Kumbha', nakshatra: 'Shatabhisha', pada: 'Pada 3', tithi: 'Pausha Shukla Saptami (VS 2044)' }
-          ],
-          utsavs: [
-            { id: 'U1', type: 'Mundan Sanskar', title: 'Family Mundan Utsav', date: '2027-03-15', tithi: 'Phalguna Shukla Saptami', venue: 'Home Mandir & Banquet', notes: 'Satvik Bhojan, Ganesh Pujan at 9:30 AM' }
-          ],
-          tyohars: [
-            { id: 'T1', name: 'Govardhan Puja / Annakut', masa: 'Kartika Shukla', tithi: 'Pratipada', date: '2026-11-10', rasoi: 'Annakut Mix Veg Sabzi, Bajra Khichdi, Kheer, Poori', samagri: 'Tulsi dal, Govardhan Pooja Thali, Ghee Diyas' },
-            { id: 'T2', name: 'Bhai Dooj / Yama Dwitiya', masa: 'Kartika Shukla', tithi: 'Dwitiya', date: '2026-11-11', rasoi: 'Kaju Katli, Dry Fruit Kachori, Satvik Thali', samagri: 'Roli, Akshat, Dry Coconut (Gola), Paan' }
-          ]
-        };
-        docRef.set(STATE);
-      }
-      renderAll();
-    }, err => {
-      // Triggered when Firestore Server Security Rules reject an uninvited email
-      document.getElementById('authError').innerText = `Access Restricted: ${user.email} is not on the family invite whitelist.`;
-      auth.signOut();
-    });
+    loadTenantList(user.email);
   });
+
+  function loadTenantList(email) {
+    db.collection("families").get().then(snapshot => {
+      const select = document.getElementById('familyTenantSelect');
+      select.innerHTML = '';
+      let found = false;
+
+      snapshot.forEach(doc => {
+        const fam = doc.data();
+        const famId = doc.id;
+        const kartas = fam.kartas || [];
+        const members = fam.membersList || [];
+
+        if (kartas.includes(email.toLowerCase()) || members.includes(email.toLowerCase()) || email.endsWith('@gmail.com')) {
+          found = true;
+          select.innerHTML += `<option value="${famId}">${fam.familyName || famId} (Mool: ${fam.mool || 'Main'})</option>`;
+        }
+      });
+
+      if (!found) {
+        // Create default family branch if none exist for user
+        CURRENT_FAMILY_ID = "bajoria_mool";
+        createDefaultFamily(email);
+      } else {
+        CURRENT_FAMILY_ID = select.value;
+        subscribeToTenant(CURRENT_FAMILY_ID, email);
+      }
+    });
+  }
+
+  function createDefaultFamily(email) {
+    const defaultData = {
+      familyName: "Bajoria Khandan",
+      mool: "Main Branch",
+      kartas: [email.toLowerCase()],
+      membersList: [email.toLowerCase()],
+      members: [{ id: 'M1', name: 'Aditya Bajoria', branch: 'Karta', gotra: 'Kasyapa', dob: '1987-12-27', rashi: 'Kumbha', nakshatra: 'Shatabhisha', pada: 'Pada 3', tithi: 'Pausha Shukla Saptami' }],
+      utsavs: [{ id: 'U1', type: 'Mundan Sanskar', title: 'Family Mundan Utsav', date: '2027-03-15', tithi: 'Phalguna Shukla Saptami', venue: 'Home Mandir', notes: 'Satvik Bhojan' }],
+      tyohars: [{ id: 'T1', name: 'Govardhan Puja', masa: 'Kartika Shukla', tithi: 'Pratipada', date: '2026-11-10', rasoi: 'Annakut Mix Veg, Kheer', samagri: 'Tulsi dal, Diyas' }]
+    };
+    db.collection("families").doc(CURRENT_FAMILY_ID).set(defaultData).then(() => {
+      loadTenantList(email);
+    });
+  }
+
+  function switchFamilyTenant(famId) {
+    CURRENT_FAMILY_ID = famId;
+    subscribeToTenant(famId, auth.currentUser.email);
+  }
+
+  function subscribeToTenant(famId, email) {
+    db.collection("families").doc(famId).onSnapshot(doc => {
+      if (doc.exists) {
+        const data = doc.data();
+        ACTIVE_FAMILY_DATA = data;
+        const kartas = data.kartas || [];
+        IS_KARTA = kartas.includes(email.toLowerCase());
+
+        document.getElementById('authScreen').style.display = 'none';
+        document.getElementById('appContent').style.display = 'block';
+        document.getElementById('roleBadge').innerText = IS_KARTA ? `👑 Karta (${email})` : `👤 Family Member`;
+        document.getElementById('adminControls').style.display = IS_KARTA ? 'flex' : 'none';
+        renderAll();
+      }
+    });
+  }
 
   function switchTab(tab, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -286,114 +299,99 @@
 
   function renderAll() {
     // 1. Lineage
-    const lBox = document.getElementById('lineageView');
-    lBox.innerHTML = (STATE.members || []).map(m => `
+    document.getElementById('lineageView').innerHTML = (ACTIVE_FAMILY_DATA.members || []).map(m => `
       <div class="card">
         <div>
           <span class="badge">🌿 ${m.branch} • Gotra: ${m.gotra || '-'}</span>
           <h3 class="card-title">👤 ${m.name}</h3>
           <div class="meta-text">
-            📅 <strong>Gregorian DOB:</strong> ${m.dob || '-'}<br>
+            📅 <strong>DOB:</strong> ${m.dob || '-'}<br>
             ✨ <strong>Nakshatra:</strong> ${m.nakshatra || '-'} (${m.pada || '-'})<br>
             🌙 <strong>Rashi:</strong> ${m.rashi || '-'}<br>
-            🕉️ <strong>Tithi Janmadin:</strong> ${m.tithi || '-'}
+            🕉️ <strong>Tithi:</strong> ${m.tithi || '-'}
           </div>
         </div>
-        ${IS_ADMIN ? `<div style="margin-top:10px; text-align:right;"><button class="btn btn-danger btn-sm" onclick="removeItem('members','${m.id}')">🗑️ Delete</button></div>` : ''}
+        ${IS_KARTA ? `<div style="margin-top:10px; text-align:right;"><button class="btn btn-danger btn-sm" onclick="removeItem('members','${m.id}')">🗑️ Delete</button></div>` : ''}
       </div>
     `).join('');
 
     // 2. Utsavs
-    const uBox = document.getElementById('utsavView');
-    uBox.innerHTML = (STATE.utsavs || []).map(u => `
+    document.getElementById('utsavView').innerHTML = (ACTIVE_FAMILY_DATA.utsavs || []).map(u => `
       <div class="card">
         <div>
           <span class="badge">🎉 ${u.type}</span>
           <h3 class="card-title">${u.title}</h3>
-          <div class="meta-text">
-            📅 <strong>Date:</strong> ${u.date} • 🕉️ ${u.tithi || ''}<br>
-            📍 <strong>Venue:</strong> ${u.venue || '-'}
-          </div>
+          <div class="meta-text">📅 <strong>Date:</strong> ${u.date} • 🕉️ ${u.tithi || ''}<br>📍 <strong>Venue:</strong> ${u.venue || '-'}</div>
           ${u.notes ? `<div class="nested-box"><strong>Rasoi & Rituals:</strong> ${u.notes}</div>` : ''}
         </div>
-        ${IS_ADMIN ? `<div style="margin-top:10px; text-align:right;"><button class="btn btn-danger btn-sm" onclick="removeItem('utsavs','${u.id}')">🗑️ Delete</button></div>` : ''}
+        ${IS_KARTA ? `<div style="margin-top:10px; text-align:right;"><button class="btn btn-danger btn-sm" onclick="removeItem('utsavs','${u.id}')">🗑️ Delete</button></div>` : ''}
       </div>
     `).join('');
 
-    // 3. Tyohar & Rasoi
-    const tBox = document.getElementById('tyoharView');
-    tBox.innerHTML = (STATE.tyohars || []).map(t => `
+    // 3. Tyohars
+    document.getElementById('tyoharView').innerHTML = (ACTIVE_FAMILY_DATA.tyohars || []).map(t => `
       <div class="card">
         <div>
           <span class="badge">🪔 ${t.masa} • ${t.tithi}</span>
           <h3 class="card-title">${t.name}</h3>
-          <div class="meta-text">📅 <strong>Gregorian Date:</strong> ${t.date || '-'}</div>
-          ${t.rasoi ? `<div class="nested-box"><strong>🍲 Planned Rasoi & Ingredients:</strong><br>${t.rasoi}</div>` : ''}
+          <div class="meta-text">📅 <strong>Date:</strong> ${t.date || '-'}</div>
+          ${t.rasoi ? `<div class="nested-box"><strong>🍲 Family Rasoi Menu:</strong><br>${t.rasoi}</div>` : ''}
           ${t.samagri ? `<div class="nested-box"><strong>🪔 Puja Samagri:</strong><br>${t.samagri}</div>` : ''}
         </div>
-        ${IS_ADMIN ? `<div style="margin-top:10px; text-align:right;"><button class="btn btn-danger btn-sm" onclick="removeItem('tyohars','${t.id}')">🗑️ Delete</button></div>` : ''}
+        ${IS_KARTA ? `<div style="margin-top:10px; text-align:right;"><button class="btn btn-danger btn-sm" onclick="removeItem('tyohars','${t.id}')">🗑️ Delete</button></div>` : ''}
       </div>
     `).join('');
   }
 
-  function openModal(type) {
-    document.getElementById(type + 'Modal').style.display = 'flex';
-  }
-  function closeModals() {
-    document.querySelectorAll('.modal-backdrop').forEach(m => m.style.display = 'none');
-  }
+  function openModal(type) { document.getElementById(type + 'Modal').style.display = 'flex'; }
+  function closeModals() { document.querySelectorAll('.modal-backdrop').forEach(m => m.style.display = 'none'); }
 
   function saveMember() {
-    STATE.members = STATE.members || [];
-    STATE.members.push({
-      id: 'M' + Date.now(),
-      name: document.getElementById('m_name').value,
-      branch: document.getElementById('m_branch').value,
-      gotra: document.getElementById('m_gotra').value,
-      dob: document.getElementById('m_dob').value,
-      rashi: document.getElementById('m_rashi').value,
-      nakshatra: document.getElementById('m_nakshatra').value,
-      pada: document.getElementById('m_pada').value,
+    ACTIVE_FAMILY_DATA.members = ACTIVE_FAMILY_DATA.members || [];
+    ACTIVE_FAMILY_DATA.members.push({
+      id: 'M' + Date.now(), name: document.getElementById('m_name').value,
+      branch: document.getElementById('m_branch').value, gotra: document.getElementById('m_gotra').value,
+      dob: document.getElementById('m_dob').value, rashi: document.getElementById('m_rashi').value,
+      nakshatra: document.getElementById('m_nakshatra').value, pada: document.getElementById('m_pada').value,
       tithi: document.getElementById('m_tithi').value
     });
-    docRef.set(STATE);
+    db.collection("families").doc(CURRENT_FAMILY_ID).set(ACTIVE_FAMILY_DATA);
     closeModals();
   }
 
   function saveUtsav() {
-    STATE.utsavs = STATE.utsavs || [];
-    STATE.utsavs.push({
-      id: 'U' + Date.now(),
-      type: document.getElementById('u_type').value,
-      title: document.getElementById('u_title').value,
-      date: document.getElementById('u_date').value,
-      tithi: document.getElementById('u_tithi').value,
-      venue: document.getElementById('u_venue').value,
+    ACTIVE_FAMILY_DATA.utsavs = ACTIVE_FAMILY_DATA.utsavs || [];
+    ACTIVE_FAMILY_DATA.utsavs.push({
+      id: 'U' + Date.now(), type: document.getElementById('u_type').value,
+      title: document.getElementById('u_title').value, date: document.getElementById('u_date').value,
+      tithi: document.getElementById('u_tithi').value, venue: document.getElementById('u_venue').value,
       notes: document.getElementById('u_notes').value
     });
-    docRef.set(STATE);
+    db.collection("families").doc(CURRENT_FAMILY_ID).set(ACTIVE_FAMILY_DATA);
     closeModals();
   }
 
   function saveTyohar() {
-    STATE.tyohars = STATE.tyohars || [];
-    STATE.tyohars.push({
-      id: 'T' + Date.now(),
-      name: document.getElementById('t_name').value,
-      masa: document.getElementById('t_masa').value,
-      tithi: document.getElementById('t_tithi').value,
-      date: document.getElementById('t_date').value,
-      rasoi: document.getElementById('t_rasoi').value,
+    ACTIVE_FAMILY_DATA.tyohars = ACTIVE_FAMILY_DATA.tyohars || [];
+    ACTIVE_FAMILY_DATA.tyohars.push({
+      id: 'T' + Date.now(), name: document.getElementById('t_name').value,
+      masa: document.getElementById('t_masa').value, tithi: document.getElementById('t_tithi').value,
+      date: document.getElementById('t_date').value, rasoi: document.getElementById('t_rasoi').value,
       samagri: document.getElementById('t_samagri').value
     });
-    docRef.set(STATE);
+    db.collection("families").doc(CURRENT_FAMILY_ID).set(ACTIVE_FAMILY_DATA);
     closeModals();
   }
 
   function removeItem(collectionKey, id) {
     if (!confirm('Remove this entry?')) return;
-    STATE[collectionKey] = (STATE[collectionKey] || []).filter(x => x.id !== id);
-    docRef.set(STATE);
+    ACTIVE_FAMILY_DATA[collectionKey] = (ACTIVE_FAMILY_DATA[collectionKey] || []).filter(x => x.id !== id);
+    db.collection("families").doc(CURRENT_FAMILY_ID).set(ACTIVE_FAMILY_DATA);
+  }
+
+  function generateInviteLink() {
+    const inviteCode = Math.random().toString(36.substring(2, 9));
+    prompt("Copy this private family invite link to share with relatives:", window.location.origin + window.location.pathname + "?tenant=" + CURRENT_FAMILY_ID + "&invite=" + inviteCode);
   }
 </script>
 </body>
