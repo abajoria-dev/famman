@@ -18,31 +18,23 @@
     * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
     body { margin: 0; background: var(--cream); color: var(--text); padding-bottom: 90px; }
 
-    /* Auth Screen */
     #authScreen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
     .auth-box { background: white; padding: 32px 26px; border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 8px 25px rgba(0,0,0,0.06); max-width: 440px; width: 100%; text-align: center; }
     .auth-btn-stack { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
-    .oauth-btn {
-      background: #fff; border: 1px solid #cbd5e1; color: #1e293b; padding: 11px 16px;
-      border-radius: 10px; font-weight: 600; cursor: pointer; display: flex; align-items: center;
-      justify-content: center; gap: 10px; width: 100%; font-size: 0.92rem; transition: background 0.15s;
-    }
+    .oauth-btn { background: #fff; border: 1px solid #cbd5e1; color: #1e293b; padding: 11px 16px; border-radius: 10px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; font-size: 0.92rem; }
     .oauth-btn:hover { background: #f8fafc; }
     .oauth-btn.apple { background: #000; color: #fff; border-color: #000; }
-    .oauth-btn.apple:hover { background: #1f2937; }
     .divider { display: flex; align-items: center; text-align: center; color: var(--muted); font-size: 0.76rem; margin: 16px 0 12px; }
     .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
     .divider:not(:empty)::before { margin-right: .75em; }
     .divider:not(:empty)::after { margin-left: .75em; }
 
-    /* Header */
     header { background: linear-gradient(135deg, var(--saffron-dark), var(--saffron)); color: white; padding: 12px 18px; box-shadow: 0 3px 12px rgba(156,51,9,0.25); position: sticky; top: 0; z-index: 40; }
     .header-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1380px; margin: 0 auto; }
     .app-title { font-size: 1.2rem; font-weight: 700; margin: 0; }
     .header-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
     .role-badge { background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; }
 
-    /* Controls & Tabs */
     .controls { max-width: 1380px; margin: 12px auto; padding: 0 14px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
     .tabs { display: flex; gap: 4px; background: #f3e5d5; padding: 4px; border-radius: 11px; flex-wrap: wrap; }
     .tab-btn { border: none; background: transparent; padding: 7px 11px; border-radius: 8px; font-weight: 600; color: var(--muted); cursor: pointer; font-size: 0.81rem; }
@@ -68,8 +60,8 @@
     .nested-box { background: #fdf8f2; border-left: 3px solid var(--marigold); padding: 8px 10px; font-size: 0.8rem; border-radius: 6px; margin-top: 7px; }
     .card-actions { display: flex; justify-content: flex-end; gap: 5px; margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--border); flex-wrap: wrap; }
 
-    /* N-Level Linked-List Hierarchical Tree CSS */
-    .tree-scroll { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 24px; overflow-x: auto; min-height: 360px; }
+    /* Traditional Tree Layout with Heart Connector */
+    .tree-scroll { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 24px; overflow-x: auto; min-height: 380px; }
     .vansh-tree ul { padding-top: 20px; position: relative; display: flex; justify-content: center; list-style-type: none; margin: 0; padding-left: 0; }
     .vansh-tree li { float: left; text-align: center; list-style-type: none; position: relative; padding: 20px 8px 0 8px; }
     .vansh-tree li::before, .vansh-tree li::after { content: ''; position: absolute; top: 0; right: 50%; border-top: 2px solid #d97706; width: 50%; height: 20px; }
@@ -80,13 +72,14 @@
     .vansh-tree li:last-child::before { border-right: 2px solid #d97706; border-radius: 0 6px 0 0; }
     .vansh-tree li:first-child::after { border-radius: 6px 0 0 0; }
     .vansh-tree ul ul::before { content: ''; position: absolute; top: 0; left: 50%; border-left: 2px solid #d97706; width: 0; height: 20px; }
-    .node-card { border: 2px solid var(--saffron); background: #fffaf3; padding: 10px 12px; border-radius: 11px; display: inline-block; min-width: 195px; max-width: 245px; text-align: left; box-shadow: 0 3px 8px rgba(0,0,0,0.05); }
-    .node-card.joined { border-color: var(--blue); background: #eff6ff; }
-    .node-card.deceased { border-color: #7e22ce; background: #faf5ff; }
-    .node-card h5 { margin: 0 0 4px 0; font-size: 0.88rem; color: var(--text); }
-    .node-card p { margin: 2px 0; font-size: 0.73rem; color: var(--muted); }
+    .couple-node { display: inline-flex; align-items: center; gap: 6px; background: #fffaf3; border: 2px solid var(--saffron); padding: 10px 12px; border-radius: 12px; box-shadow: 0 3px 8px rgba(0,0,0,0.05); }
+    .couple-node.deceased { border-color: #7e22ce; background: #faf5ff; }
+    .node-box { text-align: left; min-width: 140px; }
+    .node-box h5 { margin: 0 0 3px 0; font-size: 0.85rem; color: var(--text); }
+    .node-box p { margin: 2px 0; font-size: 0.72rem; color: var(--muted); }
+    .heart-badge { font-size: 1.1rem; padding: 0 2px; }
 
-    /* Monthly Gregorian + Tithi Calendar Grid */
+    /* Monthly Calendar */
     .cal-wrapper { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 18px; }
     .cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
@@ -101,9 +94,9 @@
     .cal-ev.utsav { background: #dcfce7; color: #166534; }
     .cal-ev.shraddha { background: #f3e8ff; color: #6b21a8; }
 
-    /* Modals */
+    /* Modals & Dropdowns Config */
     .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 100; padding: 12px; }
-    .modal { background: white; border-radius: 16px; max-width: 680px; width: 100%; padding: 20px; max-height: 92vh; overflow-y: auto; }
+    .modal { background: white; border-radius: 16px; max-width: 700px; width: 100%; padding: 20px; max-height: 92vh; overflow-y: auto; }
     .form-group { margin-bottom: 9px; }
     .form-group label { display: block; font-size: 0.77rem; font-weight: 600; margin-bottom: 3px; color: var(--muted); }
     .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -112,7 +105,6 @@
     .inline-parent-box { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 10px; border-radius: 8px; margin-top: 6px; display: none; }
     .dish-item-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin-bottom: 8px; }
 
-    /* Gemini Drawer */
     #aiDrawer { position: fixed; top: 0; right: -420px; width: 390px; max-width: 92vw; height: 100vh; background: white; border-left: 2px solid var(--border); box-shadow: -6px 0 24px rgba(0,0,0,0.12); z-index: 95; display: flex; flex-direction: column; transition: right 0.28s ease; }
     #aiDrawer.open { right: 0; }
     .ai-header { background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
@@ -122,8 +114,6 @@
     .ai-bubble.bot { background: white; color: var(--text); border: 1px solid #e2e8f0; align-self: flex-start; }
     .ai-fab { position: fixed; bottom: 18px; right: 18px; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; border: none; padding: 12px 16px; border-radius: 30px; font-weight: 700; cursor: pointer; box-shadow: 0 5px 18px rgba(79,70,229,0.35); z-index: 80; font-size: 0.84rem; }
 
-    /* Printable View Modal */
-    #printAreaModal .modal { max-width: 760px; }
     @media print {
       body * { visibility: hidden; }
       #printableContent, #printableContent * { visibility: visible; }
@@ -133,7 +123,7 @@
 </head>
 <body>
 
-  <!-- 1. Multi-Provider Login (Google, Microsoft, Apple & Passwordless Magic Link) -->
+  <!-- Auth Screen -->
   <div id="authScreen">
     <div class="auth-box">
       <div style="font-size: 2.5rem;">🌳</div>
@@ -141,19 +131,10 @@
       <p style="font-size: 0.84rem; color: var(--muted); margin: 0;">N-Level Lineage Graph, Global Jyotish Engine, Structured Rasoi & Panchang Calendar</p>
 
       <div class="auth-btn-stack">
-        <!-- Google -->
         <button class="oauth-btn" onclick="signInWithProvider('google')">
           <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.16 21.32 7.21 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.18C.43 8.13 0 9.87 0 11.7s.43 3.57 1.18 5.09l4.09-2.55z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.21 0 3.16 2.68 1.18 6.61l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
           Continue with Google
         </button>
-
-        <!-- Microsoft -->
-        <button class="oauth-btn" onclick="signInWithProvider('microsoft')">
-          <svg width="18" height="18" viewBox="0 0 23 23"><path fill="#f35325" d="M1 1h10v10H1z"/><path fill="#81bc06" d="M12 1h10v10H12z"/><path fill="#05a6f0" d="M1 12h10v10H1z"/><path fill="#ffba08" d="M12 12h10v10H12z"/></svg>
-          Continue with Microsoft
-        </button>
-
-        <!-- Apple -->
         <button class="oauth-btn apple" onclick="signInWithProvider('apple')">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
           Continue with Apple
@@ -161,18 +142,16 @@
       </div>
 
       <div class="divider">OR SIGN IN VIA EMAIL MAGIC LINK</div>
-
       <div style="display:flex; gap:6px;">
-        <input type="email" id="magicLinkEmail" placeholder="Any Email (iCloud, Outlook, Yahoo...)">
+        <input type="email" id="magicLinkEmail" placeholder="Your Email Address">
         <button class="btn" style="white-space:nowrap;" onclick="sendEmailMagicLink()">✉️ Send Link</button>
       </div>
-
       <div id="authError" style="color: var(--danger); font-size: 0.81rem; margin-top: 12px; font-weight: 600;"></div>
       <div id="authSuccess" style="color: var(--green); font-size: 0.81rem; margin-top: 12px; font-weight: 600;"></div>
     </div>
   </div>
 
-  <!-- 2. Main Application -->
+  <!-- Main Application -->
   <div id="appContent" style="display:none;">
     <header>
       <div class="header-top">
@@ -193,14 +172,15 @@
     <div class="controls">
       <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('lineage', this)">👥 Members & Jyotish</button>
-        <button class="tab-btn" onclick="switchTab('tree', this)">🌳 N-Level Linked Tree</button>
-        <button class="tab-btn" onclick="switchTab('calendar', this)">📅 Panchang & Birthday Calendar</button>
-        <button class="tab-btn" onclick="switchTab('utsav', this)">🎉 Utsav & Structured Rasoi</button>
+        <button class="tab-btn" onclick="switchTab('tree', this)">🌳 Linked Family Tree</button>
+        <button class="tab-btn" onclick="switchTab('calendar', this)">📅 Panchang & Calendar</button>
+        <button class="tab-btn" onclick="switchTab('utsav', this)">🎉 Utsav & Rasoi</button>
         <button class="tab-btn" onclick="switchTab('tyohar', this)">🪔 Tyohar & Samagri</button>
-        <button class="tab-btn" onclick="switchTab('pitru', this)">🕉️ Pitru & Swargवास</button>
+        <button class="tab-btn" onclick="switchTab('pitru', this)">🕉️ Enter Swargwas</button>
         <button class="tab-btn" onclick="switchTab('publicLib', this)">🌍 Parampara Library</button>
-        <button class="tab-btn" onclick="switchTab('milan', this)">🤝 Karta Vansh-Milan <span id="approvalBadgeCount" style="background:#dc2626; color:white; padding:1px 6px; border-radius:10px; font-size:0.7rem; display:none;">0</span></button>
-        <button class="tab-btn" id="superAdminTabBtn" style="display:none; color:#6d28d9;" onclick="switchTab('superAdmin', this)">🛡️ Super Admin Console</button>
+        <button class="tab-btn" onclick="switchTab('config', this)">⚙️ Config Dropdowns</button>
+        <button class="tab-btn" onclick="switchTab('milan', this)">🤝 Vansh-Milan <span id="approvalBadgeCount" style="background:#dc2626; color:white; padding:1px 6px; border-radius:10px; font-size:0.7rem; display:none;">0</span></button>
+        <button class="tab-btn" id="superAdminTabBtn" style="display:none; color:#6d28d9;" onclick="switchTab('superAdmin', this)">🛡️ Super Admin</button>
       </div>
       <div style="display:flex; gap:6px; flex-wrap:wrap;">
         <button class="btn" onclick="openMemberModal()">+ Add Member</button>
@@ -213,34 +193,33 @@
       <!-- TAB 1: Members -->
       <div id="lineageView" class="grid"></div>
 
-      <!-- TAB 2: True N-Level Linked-List Tree -->
+      <!-- TAB 2: Tree -->
       <div id="treeView" style="display:none;">
         <div class="tree-scroll">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
             <div>
-              <h3 style="margin:0;">🌳 Infinite N-Level Linked Family Tree (Vansh Vriksha)</h3>
-              <p style="margin:2px 0 0; font-size:0.81rem; color:var(--muted);">Built dynamically via Parent Pointers (Father/Mother IDs) across unlimited generations and joined Karta trees.</p>
+              <h3 style="margin:0;">🌳 Traditional Vansh Vriksha (Parent-Couple Connected by Heart)</h3>
+              <p style="margin:2px 0 0; font-size:0.81rem; color:var(--muted);">Couples are linked with a Heart (❤️) symbol connecting outward to children across generations.</p>
             </div>
             <div style="font-size:0.76rem; display:flex; gap:12px;">
-              <span>🟧 <strong>Living Member</strong></span>
-              <span>🟪 <strong>Swargवासी (Deceased)</strong></span>
-              <span>🟦 <strong>Joined Karta Branch</strong></span>
+              <span>🟧 <strong>Living Couple</strong></span>
+              <span>🟪 <strong>Swargbasi</strong></span>
             </div>
           </div>
           <div class="vansh-tree" id="treeCanvas"></div>
         </div>
       </div>
 
-      <!-- TAB 3: Family Gregorian + Local Tithi Calendar -->
+      <!-- TAB 3: Calendar -->
       <div id="calendarView" style="display:none;">
         <div class="cal-wrapper">
           <div class="cal-header">
             <div>
               <h3 style="margin:0;" id="calMonthTitle">November 2026</h3>
-              <div style="font-size:0.79rem; color:var(--muted);" id="calLocationSub">Local Timezone Panchang</div>
+              <div style="font-size:0.79rem; color:var(--muted);" id="calLocationSub">Local Panchang</div>
             </div>
             <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-              <input type="text" id="calCityInput" placeholder="Calendar City" style="width:160px;" onchange="renderCalendar()">
+              <select id="calCityPicker" style="width:180px;" onchange="renderCalendar()"></select>
               <button class="btn btn-outline btn-sm" onclick="changeCalMonth(-1)">◀ Prev</button>
               <button class="btn btn-outline btn-sm" onclick="changeCalMonth(0)">Today</button>
               <button class="btn btn-outline btn-sm" onclick="changeCalMonth(1)">Next ▶</button>
@@ -250,59 +229,87 @@
         </div>
       </div>
 
-      <!-- TAB 4: Sanskar & Utsav -->
+      <!-- TAB 4: Utsav -->
       <div id="utsavView" class="grid" style="display:none;"></div>
 
-      <!-- TAB 5: Tyohar & Samagri -->
+      <!-- TAB 5: Tyohar -->
       <div id="tyoharView" class="grid" style="display:none;"></div>
 
-      <!-- TAB 6: Pitru & Swargवास (Death & Cremation Details) -->
+      <!-- TAB 6: Pitru / Swargwas Registry -->
       <div id="pitruView" style="display:none;">
         <div style="background:white; padding:14px 18px; border-radius:12px; border:1px solid var(--border); margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
           <div>
-            <h3 style="margin:0 0 4px 0;">🕉️ Pitru Smriti, Swargवास & Cremation Registry</h3>
-            <p style="margin:0; font-size:0.83rem; color:var(--muted);">Record date & place of passing, Antyeshti / cremation site, Asthi Visarjan, and Shraddha Tithi for ancestors.</p>
+            <h3 style="margin:0 0 4px 0;">🕉️ Enter Swargwas & Cremation Records</h3>
+            <p style="margin:0; font-size:0.83rem; color:var(--muted);">Record passing details, cremation ghats, and annual Shraddha Tithis for ancestors.</p>
           </div>
-          <button class="btn btn-purple" onclick="openPitruModal()">+ Update Member Swargवास / Cremation Details</button>
+          <button class="btn btn-purple" onclick="openPitruModal()">+ Enter Swargwas Details</button>
         </div>
         <div id="pitruGrid" class="grid"></div>
       </div>
 
-      <!-- TAB 7: Public Parampara Library -->
+      <!-- TAB 7: Public Library -->
       <div id="publicLibView" style="display:none;">
         <div id="publicLibGrid" class="grid"></div>
       </div>
 
-      <!-- TAB 8: Karta Vansh-Milan & Member Approval Queue -->
+      <!-- TAB 8: Master Dropdowns Config -->
+      <div id="configView" style="display:none;">
+        <div class="card" style="border-left-color:var(--purple);">
+          <h3 style="margin-top:0; color:var(--purple);">⚙️ Configurable Master Dropdowns Manager</h3>
+          <p class="meta-text">Add, edit, or remove custom items for Gotras, Utsav Types, Rasoi Categories, and Puja Samagri templates across your family hub.</p>
+          <div class="row-2" style="margin-top:12px;">
+            <div class="form-group">
+              <label>Select Dropdown Category</label>
+              <select id="configCatSelect" onchange="renderConfigValues()">
+                <option value="gotras">Birth Gotras</option>
+                <option value="utsavTypes">Sanskar / Utsav Types</option>
+                <option value="rasoiCategories">Rasoi Categories</option>
+                <option value="samagriTemplates">Puja Samagri Templates</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Add New Value</label>
+              <div style="display:flex; gap:6px;">
+                <input type="text" id="configNewValueInput" placeholder="New item name...">
+                <button class="btn btn-success btn-sm" onclick="addMasterConfigValue()">+ Add</button>
+              </div>
+            </div>
+          </div>
+          <div id="configValuesList" style="margin-top:12px; display:flex; gap:6px; flex-wrap:wrap;"></div>
+        </div>
+      </div>
+
+      <!-- TAB 9: Vansh-Milan -->
       <div id="milanView" style="display:none;">
         <div class="row-2" style="align-items:start;">
           <div class="card">
-            <h3 style="margin-top:0;">⏳ Pending Member Additions (Awaiting Karta Approval)</h3>
-            <p class="meta-text">When invited family members add new people to the tree, Kartas can review and approve them here.</p>
+            <h3 style="margin-top:0;">⏳ Pending Member Approvals</h3>
             <div id="pendingApprovalsList" class="meta-text">No pending member approvals.</div>
           </div>
           <div class="card">
-            <h3 style="margin-top:0;">🤝 Karta-to-Karta Vansh-Milan (Join Trees)</h3>
+            <h3 style="margin-top:0;">🤝 Karta Vansh-Milan (Join Trees)</h3>
             <p class="meta-text">Your Family ID: <strong id="myFamilyIdDisplay"></strong></p>
-            <div class="form-group"><label>Select Target Family / Karta</label><select id="joinTargetFamilySelect"></select></div>
-            <div class="form-group"><label>Matching / Linking Ancestor Name & Relation</label><input type="text" id="joinMyAnchor" placeholder="e.g., Grandfather Ramprasad (Brother of Shyamprasad)"></div>
+            <div class="form-group"><label>Target Family</label><select id="joinTargetFamilySelect"></select></div>
+            <div class="form-group"><label>Linking Ancestor & Relation</label><input type="text" id="joinMyAnchor" placeholder="e.g., Grandfather Ramprasad"></div>
             <button class="btn" onclick="sendJoinRequest()">📨 Send Vansh-Milan Request</button>
             <hr style="border:none; border-top:1px solid var(--border); margin:14px 0;">
-            <h4 style="margin:0 0 8px 0;">📬 Active & Pending Tree Merges</h4>
             <div id="joinRequestsList" class="meta-text"></div>
           </div>
         </div>
       </div>
 
-      <!-- TAB 9: Super Admin Console (Only Visible to Platform Admin) -->
+      <!-- TAB 10: Super Admin Console -->
       <div id="superAdminView" style="display:none;">
-        <div class="card" style="margin-bottom:14px; border-left-color:var(--purple);">
+        <div class="card" style="margin-bottom:14px; border-left-color:var(--danger);">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <div>
-              <h3 style="margin:0; color:var(--purple);">🛡️ Super Admin Governance Console</h3>
-              <p class="meta-text" style="margin:4px 0 0;">Only you (Platform Admin) can create new Mool/Khandaans, assign initial Kartas, inspect all Karta lineages, and link any two family trees.</p>
+              <h3 style="margin:0; color:var(--danger);">🧨 Super Admin Platform Clean Slate</h3>
+              <p class="meta-text" style="margin:4px 0 0;">Permanently erase and reset all families, members, and custom configurations back to factory state.</p>
             </div>
-            <button class="btn btn-purple" onclick="openFamilyModal(false)">+ Create New Mool & Assign Karta</button>
+            <div>
+              <input type="text" id="cleanSlateConfirmInput" placeholder="Type ERASE ALL DATA" style="width:160px; display:inline-block; margin-right:6px;">
+              <button class="btn btn-danger" onclick="executeCleanSlate()">🧨 Clean Slate / Reset</button>
+            </div>
           </div>
         </div>
         <div id="superAdminFamiliesGrid" class="grid"></div>
@@ -315,7 +322,7 @@
       <div class="ai-header">
         <div>
           <div style="font-weight:700; font-size:0.95rem;">✨ Gemini Kul-Sahayak</div>
-          <div style="font-size:0.72rem; opacity:0.85;">Private In-App Lineage & Jyotish Agent</div>
+          <div style="font-size:0.72rem; opacity:0.85;">Private Lineage & Jyotish Agent</div>
         </div>
         <button class="btn btn-sm" style="background:rgba(255,255,255,0.2);" onclick="toggleAiDrawer()">✕</button>
       </div>
@@ -323,7 +330,7 @@
         <input type="password" id="geminiApiKeyInput" placeholder="Optional: Gemini API Key" style="font-size:0.75rem; padding:5px 8px;" onchange="localStorage.setItem('kulvansh_gemini_key', this.value.trim())">
       </div>
       <div class="ai-messages" id="aiMessages">
-        <div class="ai-bubble bot">🙏 <strong>Pranam!</strong> Ask me about Tithis, global birth Nakshatras, Rasoi ingredients, or your N-level family tree.</div>
+        <div class="ai-bubble bot">🙏 <strong>Pranam!</strong> Ask me about Tithis, Nakshatras, or your family Vansh tree.</div>
       </div>
       <div style="padding:10px; border-top:1px solid #e2e8f0; display:flex; gap:6px; background:white;">
         <input type="text" id="aiPromptInput" placeholder="Ask Kul-Sahayak..." onkeydown="if(event.key==='Enter') sendAiMessage()">
@@ -332,55 +339,61 @@
     </div>
   </div>
 
-  <!-- MODAL 1: Create / Edit Mool & Karta Assignment -->
+  <!-- MODAL 1: Create / Edit Mool (Mool Settings) -->
   <div class="modal-backdrop" id="familyModal">
     <div class="modal">
-      <h3 style="margin-top:0;" id="familyModalTitle">🏛️ Create / Edit Family Mool & Karta</h3>
+      <h3 style="margin-top:0;" id="familyModalTitle">🏛️ Family Mool Settings</h3>
       <input type="hidden" id="f_mode" value="create">
       <div class="row-2">
-        <div class="form-group"><label>Family / Khandaan Name *</label><input type="text" id="f_name" placeholder="e.g., Bajoria Khandaan / Sharma Parivar"></div>
-        <div class="form-group"><label>Mool / Ancestral Origin *</label><input type="text" id="f_mool" placeholder="e.g., Fatehpur Shekhawati / Kolkata"></div>
+        <div class="form-group"><label>Family / Khandaan Name *</label><input type="text" id="f_name" placeholder="e.g., Bajoria Khandaan"></div>
+        <div class="form-group"><label>Mool / Ancestral Origin *</label><input type="text" id="f_mool" placeholder="e.g., Fatehpur Shekhawati"></div>
       </div>
       <div class="row-2">
-        <div class="form-group"><label>Default Gotra</label><input type="text" id="f_gotra" placeholder="e.g., Kasyapa"></div>
-        <div class="form-group"><label>Default Timezone</label><input type="text" id="f_tz" placeholder="America/Chicago or Asia/Kolkata"></div>
+        <div class="form-group"><label>Default Gotra</label><select id="f_gotra"></select></div>
+        <div class="form-group"><label>Default Timezone</label><select id="f_tz"></select></div>
       </div>
-      <div class="form-group"><label>👑 Designated Karta Email Address(es) (Google, Microsoft, Apple, etc. — comma-separated)</label><input type="text" id="f_kartas" placeholder="karta1@gmail.com, karta2@outlook.com"></div>
+      <div class="form-group"><label>👑 Karta Emails (comma-separated)</label><input type="text" id="f_kartas" placeholder="karta@gmail.com"></div>
       <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
         <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
-        <button class="btn" onclick="saveFamilyMool()">💾 Save Family Mool</button>
+        <button class="btn" onclick="saveFamilyMool()">💾 Save Mool Settings</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 2: Add / Edit Member (With 18+ Parent Filter, Inline Parent Creation & Cross-Tree Match) -->
+  <!-- MODAL 2: Add / Edit Member (Gender, Birth Gotra, Wife Link & 12-yr Window) -->
   <div class="modal-backdrop" id="memberModal">
     <div class="modal">
       <h3 style="margin-top:0;" id="memberModalTitle">🌿 Add / Edit Family Member</h3>
       <input type="hidden" id="m_id">
       <div class="row-3">
         <div class="form-group"><label>Full Name *</label><input type="text" id="m_name" placeholder="Full Name"></div>
-        <div class="form-group"><label>Branch / Relation Role</label><input type="text" id="m_branch" placeholder="e.g., Self / Son / Daughter"></div>
-        <div class="form-group"><label>Gotra</label><input type="text" id="m_gotra" placeholder="Gotra"></div>
+        <div class="form-group">
+          <label>Gender *</label>
+          <select id="m_gender" onchange="toggleWifeField()">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Birth Gotra</label><select id="m_gotra"></select></div>
       </div>
 
-      <!-- Contact & Residence (Auto-Grants Read-Only + Self-Edit Access) -->
       <div class="row-3">
-        <div class="form-group"><label>📧 Email (Auto-grants app access)</label><input type="email" id="m_email" placeholder="relative@gmail.com / @outlook.com"></div>
-        <div class="form-group"><label>📱 Phone Number</label><input type="tel" id="m_phone" placeholder="+1 / +91 ..."></div>
-        <div class="form-group"><label>🏙️ Current City of Residence</label><input type="text" id="m_residence" placeholder="e.g., Cypress, TX / Kolkata"></div>
+        <div class="form-group"><label>📧 Email</label><input type="email" id="m_email" placeholder="email@domain.com"></div>
+        <div class="form-group"><label>📱 Phone</label><input type="tel" id="m_phone" placeholder="+1 / +91 ..."></div>
+        <div class="form-group"><label>🏙️ Residence City Picker</label><select id="m_residence"></select></div>
       </div>
 
-      <!-- Global Birth & Auto-Jyotish -->
+      <!-- Jyotish & Panchang Calculator -->
       <div class="auto-box">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-          <strong style="font-size:0.81rem; color:var(--saffron-dark);">🌍 Global Birth Details (Auto-Filters 18+ Parents & Computes Jyotish)</strong>
+          <strong style="font-size:0.81rem; color:var(--saffron-dark);">🌍 Global Birth Details & Panchang Location Picker</strong>
           <button type="button" class="btn btn-sm" onclick="autoCalculateVedicDetails()">⚡ Calculate Jyotish</button>
         </div>
         <div class="row-3">
           <div class="form-group"><label>Date of Birth</label><input type="date" id="m_dob" onchange="onChildDobChanged()"></div>
           <div class="form-group"><label>Time of Birth</label><input type="time" id="m_tob" value="12:00" onchange="autoCalculateVedicDetails()"></div>
-          <div class="form-group"><label>Place of Birth (Anywhere on Earth)</label><input type="text" id="m_pob" placeholder="City, Country" onblur="autoCalculateVedicDetails()"></div>
+          <div class="form-group"><label>Panchang / Birth City Picker</label><select id="m_pob" onchange="autoCalculateVedicDetails()"></select></div>
         </div>
         <div id="panchangCalcStatus" style="font-size:0.74rem; color:var(--green); font-weight:600; margin-bottom:6px;"></div>
         <div class="row-3">
@@ -388,43 +401,40 @@
           <div class="form-group"><label>Janma Nakshatra</label><input type="text" id="m_nakshatra"></div>
           <div class="form-group"><label>Pada (1-4)</label><input type="text" id="m_pada"></div>
         </div>
-        <div class="form-group" style="margin-bottom:0;"><label>Hindu Tithi Birthday (Masa + Paksha + Tithi)</label><input type="text" id="m_tithi"></div>
+        <div class="form-group" style="margin-bottom:0;"><label>Hindu Tithi Birthday</label><input type="text" id="m_tithi"></div>
       </div>
 
-      <!-- Smart 18+ Parent Dropdowns + Inline New Parent Creator -->
+      <!-- Parents & Wife Linked Items with 12-yr Window -->
       <div class="row-2">
         <div class="form-group">
-          <label>👨 Father (Filtered ≥18 yrs older or Unknown DOB)</label>
+          <label>👨 Father (Filtered ≥18 yrs older)</label>
           <select id="m_fatherId" onchange="checkParentInlineToggle('father')"></select>
           <div class="inline-parent-box" id="inlineFatherBox">
-            <strong style="font-size:0.76rem; color:var(--green);">➕ Auto-Create New Father Node:</strong>
-            <input type="text" id="new_father_name" placeholder="Father's Full Name" style="margin-top:4px;" oninput="checkCrossKartaParentMatch('father')">
+            <input type="text" id="new_father_name" placeholder="Father's Full Name" style="margin-top:4px;">
             <div class="row-2" style="margin-top:4px;">
-              <input type="date" id="new_father_dob" onchange="checkCrossKartaParentMatch('father')">
-              <input type="text" id="new_father_pob" placeholder="Father's Place of Birth" oninput="checkCrossKartaParentMatch('father')">
+              <input type="date" id="new_father_dob">
+              <select id="new_father_pob" style="margin-top:0;"></select>
             </div>
           </div>
         </div>
         <div class="form-group">
-          <label>👩 Mother (Filtered ≥18 yrs older or Unknown DOB)</label>
+          <label>👩 Mother (Filtered ≥18 yrs older)</label>
           <select id="m_motherId" onchange="checkParentInlineToggle('mother')"></select>
           <div class="inline-parent-box" id="inlineMotherBox">
-            <strong style="font-size:0.76rem; color:var(--green);">➕ Auto-Create New Mother Node:</strong>
-            <input type="text" id="new_mother_name" placeholder="Mother's Full Name" style="margin-top:4px;" oninput="checkCrossKartaParentMatch('mother')">
+            <input type="text" id="new_mother_name" placeholder="Mother's Full Name" style="margin-top:4px;">
             <div class="row-2" style="margin-top:4px;">
-              <input type="date" id="new_mother_dob" onchange="checkCrossKartaParentMatch('mother')">
-              <input type="text" id="new_mother_pob" placeholder="Mother's Place of Birth" oninput="checkCrossKartaParentMatch('mother')">
+              <input type="date" id="new_mother_dob">
+              <select id="new_mother_pob" style="margin-top:0;"></select>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Cross-Karta Duplicate Parent Match Suggestion Alert -->
-      <div id="crossKartaSuggestionBanner" style="display:none; background:#eff6ff; border:1px solid #93c5fd; padding:10px; border-radius:8px; margin-bottom:10px; font-size:0.8rem; color:#1e3a8a;"></div>
-
-      <div class="form-group">
-        <label>💍 Spouse Name</label>
-        <input type="text" id="m_spouse" placeholder="Spouse Full Name">
+      <!-- Wife Linked Item (12-year window enforcement) -->
+      <div class="form-group" id="wifeFieldContainer" style="margin-top:8px;">
+        <label>💍 Linked Wife / Spouse (Max 12-year age difference window)</label>
+        <select id="m_wifeId"></select>
+        <div id="wifeAgeWarning" style="font-size:0.72rem; color:var(--danger); font-weight:600; margin-top:2px;"></div>
       </div>
 
       <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
@@ -434,75 +444,66 @@
     </div>
   </div>
 
-  <!-- MODAL 3: Pitru / Swargवास & Cremation Update -->
+  <!-- MODAL 3: Enter Swargwas & Cremation Details -->
   <div class="modal-backdrop" id="pitruModal">
     <div class="modal">
-      <h3 style="margin-top:0; color:var(--purple);">🕉️ Record Swargवास (Death) & Cremation Details</h3>
+      <h3 style="margin-top:0; color:var(--purple);">🕉️ Enter Swargwas & Cremation Details</h3>
       <div class="form-group">
         <label>Select Family Member</label>
         <select id="p_memberId" onchange="loadPitruMemberFields()"></select>
       </div>
       <div class="row-2">
-        <div class="form-group"><label>Date of Passing (Swargवास Date)</label><input type="date" id="p_dod" onchange="autoCalcShraddhaTithi()"></div>
-        <div class="form-group"><label>Place of Passing (City, Country)</label><input type="text" id="p_pod" placeholder="e.g., Kolkata, India"></div>
+        <div class="form-group"><label>Date of Passing</label><input type="date" id="p_dod" onchange="autoCalcShraddhaTithi()"></div>
+        <div class="form-group"><label>Place of Passing City Picker</label><select id="p_pod"></select></div>
       </div>
       <div class="row-2">
-        <div class="form-group"><label>Date of Cremation (Antyeshti Date)</label><input type="date" id="p_doc"></div>
-        <div class="form-group"><label>Place of Cremation & Asthi Visarjan Ghat</label><input type="text" id="p_poc" placeholder="e.g., Keoratala / Kashi Manikarnika / Haridwar"></div>
+        <div class="form-group"><label>Date of Cremation</label><input type="date" id="p_doc"></div>
+        <div class="form-group"><label>Place of Cremation & Visarjan Ghat City Picker</label><select id="p_poc"></select></div>
       </div>
-      <div class="form-group"><label>Annual Shraddha Tithi (Auto-calculated from Death Date & Editable)</label><input type="text" id="p_shraddhaTithi" placeholder="e.g., Bhadrapada Krishna Panchami"></div>
-      <div class="form-group"><label>Memorial Notes / Pitru Tarpan Custom</label><textarea id="p_notes" rows="2"></textarea></div>
+      <div class="form-group"><label>Annual Shraddha Tithi</label><input type="text" id="p_shraddhaTithi"></div>
+      <div class="form-group"><label>Memorial Notes</label><textarea id="p_notes" rows="2"></textarea></div>
       <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
         <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
-        <button class="btn btn-purple" onclick="savePitruDetails()">💾 Save Swargवास Record</button>
+        <button class="btn btn-purple" onclick="savePitruDetails()">💾 Save Swargwas Record</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 4: Utsav & Sanskar (With Structured Rasoi Dish -> Ingredients List & Timezone) -->
+  <!-- MODAL 4: Utsav & Sanskar (Timezone & Location Pickers) -->
   <div class="modal-backdrop" id="utsavModal">
     <div class="modal">
-      <h3 style="margin-top:0;">🎉 Schedule Utsav / Sanskar (Structured Rasoi & Samagri)</h3>
+      <h3 style="margin-top:0;">🎉 Schedule Utsav / Sanskar</h3>
       <input type="hidden" id="u_id">
       <div class="row-2">
-        <div class="form-group">
-          <label>Sanskar / Utsav Type</label>
-          <select id="u_type">
-            <option>Vivah / Shaadi</option><option>Mundan Sanskar</option><option>Naamkaran / Annaprashan</option>
-            <option>Upanayana / Janeu</option><option>Griha Pravesh</option><option>Satyanarayan Katha / Janmadin Utsav</option>
-          </select>
-        </div>
+        <div class="form-group"><label>Sanskar / Utsav Type</label><select id="u_type"></select></div>
         <div class="form-group"><label>Event Title *</label><input type="text" id="u_title" placeholder="Title"></div>
       </div>
       <div class="row-3">
         <div class="form-group"><label>Event Date</label><input type="date" id="u_date" onchange="autoFillEventTithi('u_date','u_tithi')"></div>
-        <div class="form-group"><label>Location / City (Defaulted)</label><input type="text" id="u_venue"></div>
-        <div class="form-group"><label>Timezone (Defaulted)</label><input type="text" id="u_tz"></div>
+        <div class="form-group"><label>Location City Picker</label><select id="u_venue"></select></div>
+        <div class="form-group"><label>Timezone Picker</label><select id="u_tz"></select></div>
       </div>
       <div class="form-group"><label>Hindu Tithi & Muhurat</label><input type="text" id="u_tithi"></div>
 
-      <!-- Structured Rasoi Items & Ingredients per Dish -->
       <div class="auto-box">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <strong style="font-size:0.82rem; color:var(--saffron-dark);">🍲 Structured Rasoi Menu (Dishes & Ingredients per Dish)</strong>
+          <strong style="font-size:0.82rem; color:var(--saffron-dark);">🍲 Structured Rasoi Menu & Ingredients</strong>
           <button type="button" class="btn btn-sm" onclick="addRasoiDishRow('u_rasoiBuilder')">+ Add Dish</button>
         </div>
         <div id="u_rasoiBuilder"></div>
       </div>
 
-      <!-- Structured Puja Samagri List -->
       <div class="auto-box">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <strong style="font-size:0.82rem; color:var(--saffron-dark);">🪔 Structured Puja Samagri Checklist</strong>
-          <button type="button" class="btn btn-sm" onclick="addSamagriRow('u_samagriBuilder')">+ Add Samagri Item</button>
+          <strong style="font-size:0.82rem; color:var(--saffron-dark);">🪔 Puja Samagri Checklist</strong>
+          <button type="button" class="btn btn-sm" onclick="addSamagriRow('u_samagriBuilder')">+ Add Samagri</button>
         </div>
         <div id="u_samagriBuilder"></div>
       </div>
 
-      <div class="form-group"><label>📖 Step-by-Step Sanskar Process / Vidhi</label><textarea id="u_notes" rows="2" placeholder="Step 1: Ganesh Pujan..."></textarea></div>
+      <div class="form-group"><label>📖 Vidhi Process</label><textarea id="u_notes" rows="2"></textarea></div>
       <div class="form-group" style="display:flex; align-items:center; gap:8px;">
-        <input type="checkbox" id="u_public" style="width:auto;">
-        <label style="margin:0;" for="u_public">🌍 Share to Public Parampara Library</label>
+        <input type="checkbox" id="u_public" style="width:auto;"><label style="margin:0;" for="u_public">🌍 Share to Public Parampara Library</label>
       </div>
       <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
         <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
@@ -511,18 +512,18 @@
     </div>
   </div>
 
-  <!-- MODAL 5: Tyohar (With Structured Rasoi Dish -> Ingredients & Samagri) -->
+  <!-- MODAL 5: Tyohar -->
   <div class="modal-backdrop" id="tyoharModal">
     <div class="modal">
-      <h3 style="margin-top:0;">🪔 Add / Edit Family Tyohar (Structured Rasoi & Samagri)</h3>
+      <h3 style="margin-top:0;">🪔 Add / Edit Family Tyohar</h3>
       <input type="hidden" id="t_id">
       <div class="row-2">
-        <div class="form-group"><label>Tyohar Name *</label><input type="text" id="t_name" placeholder="e.g., Govardhan Puja / Gangaur / Chhath"></div>
+        <div class="form-group"><label>Tyohar Name *</label><input type="text" id="t_name" placeholder="Tyohar Name"></div>
         <div class="form-group"><label>Gregorian Date</label><input type="date" id="t_date" onchange="autoFillTyoharPanchang()"></div>
       </div>
       <div class="row-2">
-        <div class="form-group"><label>Location / City</label><input type="text" id="t_location"></div>
-        <div class="form-group"><label>Timezone</label><input type="text" id="t_tz"></div>
+        <div class="form-group"><label>Location City Picker</label><select id="t_location"></select></div>
+        <div class="form-group"><label>Timezone Picker</label><select id="t_tz"></select></div>
       </div>
       <div class="row-2">
         <div class="form-group"><label>Hindu Masa & Paksha</label><input type="text" id="t_masa"></div>
@@ -531,7 +532,7 @@
 
       <div class="auto-box">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <strong style="font-size:0.82rem; color:var(--saffron-dark);">🍲 Structured Rasoi Dishes & Ingredients</strong>
+          <strong style="font-size:0.82rem; color:var(--saffron-dark);">🍲 Rasoi Menu & Ingredients</strong>
           <button type="button" class="btn btn-sm" onclick="addRasoiDishRow('t_rasoiBuilder')">+ Add Dish</button>
         </div>
         <div id="t_rasoiBuilder"></div>
@@ -539,16 +540,15 @@
 
       <div class="auto-box">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <strong style="font-size:0.82rem; color:var(--saffron-dark);">🪔 Structured Puja Samagri List</strong>
-          <button type="button" class="btn btn-sm" onclick="addSamagriRow('t_samagriBuilder')">+ Add Samagri Item</button>
+          <strong style="font-size:0.82rem; color:var(--saffron-dark);">🪔 Puja Samagri Checklist</strong>
+          <button type="button" class="btn btn-sm" onclick="addSamagriRow('t_samagriBuilder')">+ Add Samagri</button>
         </div>
         <div id="t_samagriBuilder"></div>
       </div>
 
-      <div class="form-group"><label>📖 Puja Process / Parampara Vidhi</label><textarea id="t_vidhi" rows="2"></textarea></div>
+      <div class="form-group"><label>📖 Parampara Vidhi</label><textarea id="t_vidhi" rows="2"></textarea></div>
       <div class="form-group" style="display:flex; align-items:center; gap:8px;">
-        <input type="checkbox" id="t_public" style="width:auto;">
-        <label style="margin:0;" for="t_public">🌍 Share to Public Parampara Library</label>
+        <input type="checkbox" id="t_public" style="width:auto;"><label style="margin:0;" for="t_public">🌍 Share to Public Parampara Library</label>
       </div>
       <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
         <button class="btn btn-outline" onclick="closeModals()">Cancel</button>
@@ -557,30 +557,27 @@
     </div>
   </div>
 
-  <!-- MODAL 6: Printable Utsav / Sanskar / Tyohar Sheet -->
+  <!-- MODAL 6: Printable Sheet -->
   <div class="modal-backdrop" id="printAreaModal">
     <div class="modal">
       <div id="printableContent"></div>
       <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:16px;" class="no-print">
         <button class="btn btn-outline" onclick="closeModals()">Close</button>
-        <button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+        <button class="btn" onclick="window.print()">🖨️ Print / PDF</button>
       </div>
     </div>
   </div>
 
 <script>
-  // ============================================================================
-  // 1. FIREBASE INIT & GLOBAL STATE
-  // ============================================================================
-const firebaseConfig = {
-  apiKey: "AIzaSyAM_9u6z0cntZL4V18xxOAusQR204yRao4",
-  authDomain: "famman-2026.firebaseapp.com",
-  projectId: "famman-2026",
-  storageBucket: "famman-2026.firebasestorage.app",
-  messagingSenderId: "988619839051",
-  appId: "1:988619839051:web:ec5bbcf9c0a833daa91fce",
-  measurementId: "G-FKH4WPMWXV"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyAM_9u6z0cntZL4V18xxOAusQR204yRao4",
+    authDomain: "famman-2026.firebaseapp.com",
+    projectId: "famman-2026",
+    storageBucket: "famman-2026.firebasestorage.app",
+    messagingSenderId: "988619839051",
+    appId: "1:988619839051:web:ec5bbcf9c0a833daa91fce",
+    measurementId: "G-FKH4WPMWXV"
+  };
 
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
@@ -595,195 +592,62 @@ const firebaseConfig = {
   let ACTIVE_FAMILY_DATA = null;
   let ALL_FAMILIES_CACHE = {};
 
-  const DEFAULT_TZ = Intl.DateTimeFormat().resolvedOptions().timeZone || "America/Chicago";
-  const DEFAULT_CITY = DEFAULT_TZ.includes("Kolkata") ? "Kolkata, India" : "Cypress, TX, USA";
-  let CAL_YEAR = new Date().getFullYear();
-  let CAL_MONTH = new Date().getMonth();
+  // Master Dropdowns Downloaded from Trusted Sources & Configurable
+  let MASTER_CONFIG = {
+    gotras: ["Kasyapa", "Bharadwaja", "Vashistha", "Vishwamitra", "Agastya", "Atri", "Gautama", "Jamadagni", "Sandilya", "Bhrigu", "Garg", "Katsayan"],
+    utsavTypes: ["Vivah / Shaadi", "Mundan Sanskar", "Naamkaran", "Annaprashan", "Upanayana / Janeu", "Griha Pravesh", "Satyanarayan Katha", "Janmadin Utsav"],
+    rasoiCategories: ["Satvik Bhojan", "Annakut Mix Veg", "Kheer & Halwa", "Panchamrit", "Falahari Snacks", "Puri & Sabzi"],
+    samagriTemplates: ["Roli", "Akshat", "Supari", "Kalash", "Durva", "Janve", "Panchamrit", "Camphor", "Diyas", "Incense", "Fresh Flowers"]
+  };
 
-  // Complete Email Magic Link Sign-In automatically if returning from email link
-  if (auth.isSignInWithEmailLink(window.location.href)) {
-    let email = window.localStorage.getItem('kulvansh_emailForSignIn');
-    if (!email) {
-      email = window.prompt('Please confirm your email address to complete sign-in:');
-    }
-    if (email) {
-      auth.signInWithEmailLink(email, window.location.href).then(() => {
-        window.localStorage.removeItem('kulvansh_emailForSignIn');
-        window.history.replaceState({}, document.title, window.location.pathname);
-      }).catch(err => {
-        document.getElementById('authError').innerText = err.message;
-      });
-    }
-  }
-
-  // ============================================================================
-  // 2. ASTRONOMICAL VEDIC PANCHANG & GLOBAL GEOCODING ENGINE
-  // ============================================================================
-  const NAKSHATRAS = [
-    "Ashwini","Bharani","Krittika","Rohini","Mrigashira","Ardra","Punarvasu","Pushya","Ashlesha",
-    "Magha","Purva Phalguni","Uttara Phalguni","Hasta","Chitra","Swati","Vishakha","Anuradha","Jyeshtha",
-    "Mula","Purva Ashadha","Uttara Ashadha","Shravana","Dhanishta","Shatabhisha","Purva Bhadrapada","Uttara Bhadrapada","Revati"
-  ];
-  const RASHIS = [
-    "Mesha (Aries)","Vrishabha (Taurus)","Mithuna (Gemini)","Karka (Cancer)",
-    "Simha (Leo)","Kanya (Virgo)","Tula (Libra)","Vrishchika (Scorpio)",
-    "Dhanu (Sagittarius)","Makara (Capricorn)","Kumbha (Aquarius)","Meena (Pisces)"
-  ];
-  const TITHI_NAMES = [
-    "Pratipada","Dwitiya","Tritiya","Chaturthi","Panchami","Shashthi","Saptami","Ashtami",
-    "Navami","Dashami","Ekadashi","Dwadashi","Trayodashi","Chaturdashi","Purnima / Amavasya"
-  ];
-  const HINDU_MASAS = [
-    "Chaitra","Vaishakha","Jyeshtha","Ashadha","Shravana","Bhadrapada",
-    "Ashwin","Kartika","Margashirsha","Pausha","Magha","Phalguna"
+  const TRUSTED_CITIES = [
+    "Varanasi, India", "Kolkata, India", "New Delhi, India", "Mumbai, India", "Jaipur, India",
+    "Fatehpur Shekhawati, India", "Haridwar, India", "Ayodhya, India", "Ujjain, India",
+    "Cypress, TX, USA", "Houston, TX, USA", "New York, NY, USA", "London, UK", "Singapore"
   ];
 
-  function computeVedicPanchangFromDate(dateObj) {
-    const jd = (dateObj.getTime() / 86400000) + 2440587.5;
-    const d = jd - 2451545.0;
+  const TRUSTED_TIMEZONES = [
+    "Asia/Kolkata", "America/Chicago", "America/New_York", "America/Los_Angeles", "Europe/London", "Asia/Singapore"
+  ];
 
-    const L_sun = (280.460 + 0.9856474 * d) % 360;
-    const g_sun = ((357.528 + 0.9856003 * d) % 360) * Math.PI / 180;
-    const lambda_sun = (L_sun + 1.915 * Math.sin(g_sun) + 0.020 * Math.sin(2 * g_sun) + 360) % 360;
-
-    const L_moon = (218.316 + 13.176396 * d) % 360;
-    const M_moon = ((134.963 + 13.064993 * d) % 360) * Math.PI / 180;
-    const F_moon = ((93.272 + 13.229350 * d) % 360) * Math.PI / 180;
-    const D_elong = ((297.850 + 12.190749 * d) % 360) * Math.PI / 180;
-
-    const lambda_moon = (L_moon
-      + 6.289 * Math.sin(M_moon)
-      + 1.274 * Math.sin(2 * D_elong - M_moon)
-      + 0.658 * Math.sin(2 * D_elong)
-      + 0.214 * Math.sin(2 * M_moon)
-      - 0.186 * Math.sin(g_sun)
-      - 0.114 * Math.sin(2 * F_moon) + 360) % 360;
-
-    const yearFrac = dateObj.getUTCFullYear() + (dateObj.getUTCMonth() / 12);
-    const ayanamsa = 23.85 + (yearFrac - 2000) * 0.01397;
-
-    const siderealMoon = (lambda_moon - ayanamsa + 360) % 360;
-    const siderealSun = (lambda_sun - ayanamsa + 360) % 360;
-
-    const nakSpan = 360 / 27;
-    const nakIndex = Math.floor(siderealMoon / nakSpan);
-    const pada = Math.floor((siderealMoon % nakSpan) / (nakSpan / 4)) + 1;
-    const rashiIndex = Math.floor(siderealMoon / 30);
-
-    const diff = (lambda_moon - lambda_sun + 360) % 360;
-    const tithiNum = Math.floor(diff / 12) + 1;
-    const paksha = tithiNum <= 15 ? "Shukla" : "Krishna";
-    let tithiName = TITHI_NAMES[(tithiNum - 1) % 15];
-    if (tithiNum === 15) tithiName = "Purnima";
-    if (tithiNum === 30) tithiName = "Amavasya";
-
-    const sunRashiIndex = Math.floor(siderealSun / 30);
-    const masa = HINDU_MASAS[(sunRashiIndex + 1) % 12];
-    const vsYear = dateObj.getMonth() >= 3 ? dateObj.getFullYear() + 57 : dateObj.getFullYear() + 56;
-
-    return {
-      nakshatra: NAKSHATRAS[nakIndex],
-      pada: `Pada ${pada}`,
-      rashi: RASHIS[rashiIndex],
-      masa,
-      paksha,
-      tithiName,
-      shortTithi: `${masa} ${paksha} ${tithiName}`,
-      fullTithi: `${masa} ${paksha} ${tithiName} (VS ${vsYear})`,
-      vsYear
-    };
+  function populateDropdownOptions(selectElId, items, selectedVal = '') {
+    const el = document.getElementById(selectElId);
+    if (!el) return;
+    el.innerHTML = items.map(x => `<option value="${x}" ${x === selectedVal ? 'selected' : ''}>${x}</option>`).join('');
   }
 
-  async function geocodeEarthPlace(placeStr) {
-    if (!placeStr || placeStr.trim().length < 2) return { offset: 5.5, label: "Default Timezone" };
-    try {
-      const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(placeStr)}&count=1&language=en&format=json`);
-      const geo = await res.json();
-      if (geo.results && geo.results.length > 0) {
-        const p = geo.results[0];
-        let offset = Math.round((p.longitude / 15) * 2) / 2;
-        if (p.country_code === "IN") offset = 5.5;
-        return {
-          offset,
-          label: `${p.name}, ${p.admin1 || ''} ${p.country || ''} (${p.latitude.toFixed(2)}°, ${p.longitude.toFixed(2)}° | TZ: ${p.timezone || 'Auto'})`
-        };
-      }
-    } catch (e) { console.warn(e); }
-    return { offset: 5.5, label: placeStr };
+  function populateAllStandardPickers() {
+    populateDropdownOptions('f_gotra', MASTER_CONFIG.gotras);
+    populateDropdownOptions('f_tz', TRUSTED_TIMEZONES);
+    populateDropdownOptions('m_gotra', MASTER_CONFIG.gotras);
+    populateDropdownOptions('m_residence', TRUSTED_CITIES);
+    populateDropdownOptions('m_pob', TRUSTED_CITIES);
+    populateDropdownOptions('new_father_pob', TRUSTED_CITIES);
+    populateDropdownOptions('new_mother_pob', TRUSTED_CITIES);
+    populateDropdownOptions('p_pod', TRUSTED_CITIES);
+    populateDropdownOptions('p_poc', TRUSTED_CITIES);
+    populateDropdownOptions('u_type', MASTER_CONFIG.utsavTypes);
+    populateDropdownOptions('u_venue', TRUSTED_CITIES);
+    populateDropdownOptions('u_tz', TRUSTED_TIMEZONES);
+    populateDropdownOptions('t_location', TRUSTED_CITIES);
+    populateDropdownOptions('t_tz', TRUSTED_TIMEZONES);
+    populateDropdownOptions('calCityPicker', TRUSTED_CITIES, TRUSTED_CITIES[0]);
   }
 
-  async function autoCalculateVedicDetails() {
-    const dob = document.getElementById('m_dob').value;
-    const tob = document.getElementById('m_tob').value || "12:00";
-    const pob = document.getElementById('m_pob').value.trim();
-    const statusEl = document.getElementById('panchangCalcStatus');
-    if (!dob) return;
-
-    statusEl.innerText = "🌍 Resolving global coordinates & computing planetary longitudes...";
-    const geo = await geocodeEarthPlace(pob);
-    const [yyyy, mm, dd] = dob.split('-').map(Number);
-    const [hh, min] = tob.split(':').map(Number);
-    const utcMs = Date.UTC(yyyy, mm - 1, dd, hh, min) - (geo.offset * 3600 * 1000);
-    const p = computeVedicPanchangFromDate(new Date(utcMs));
-
-    document.getElementById('m_rashi').value = p.rashi;
-    document.getElementById('m_nakshatra').value = p.nakshatra;
-    document.getElementById('m_pada').value = p.pada;
-    document.getElementById('m_tithi').value = p.fullTithi;
-    statusEl.innerText = `✅ Computed for ${geo.label}`;
-  }
-
-  // ============================================================================
-  // 3. MULTI-PROVIDER AUTHENTICATION (GOOGLE, MICROSOFT, APPLE, MAGIC LINK)
-  // ============================================================================
+  // Auth & Init
   function signInWithProvider(providerName) {
     const errBox = document.getElementById('authError');
-    const okBox = document.getElementById('authSuccess');
     errBox.innerText = '';
-    okBox.innerText = '';
-    let provider;
-
-    if (providerName === 'google') {
-      provider = new firebase.auth.GoogleAuthProvider();
-    } else if (providerName === 'microsoft') {
-      provider = new firebase.auth.OAuthProvider('microsoft.com');
-      provider.setCustomParameters({ prompt: 'select_account' });
-    } else if (providerName === 'apple') {
-      provider = new firebase.auth.OAuthProvider('apple.com');
-      provider.addScope('email');
-      provider.addScope('name');
-    }
-
-    auth.signInWithPopup(provider).catch(err => {
-      if (err.code === 'auth/account-exists-with-different-credential') {
-        errBox.innerText = `An account already exists for ${err.email} under a different login provider. Please sign in using your original provider or Email Magic Link.`;
-      } else if (err.code === 'auth/operation-not-allowed') {
-        errBox.innerText = `${providerName.toUpperCase()} provider is not yet enabled in Firebase Console > Authentication > Sign-in method. You can also use Email Magic Link below!`;
-      } else {
-        errBox.innerText = err.message;
-      }
-    });
+    let provider = providerName === 'google' ? new firebase.auth.GoogleAuthProvider() : new firebase.auth.OAuthProvider('apple.com');
+    auth.signInWithPopup(provider).catch(err => { errBox.innerText = err.message; });
   }
 
   function sendEmailMagicLink() {
     const email = document.getElementById('magicLinkEmail').value.trim();
-    const errBox = document.getElementById('authError');
-    const okBox = document.getElementById('authSuccess');
-    errBox.innerText = '';
-    okBox.innerText = '';
-    if (!email) {
-      errBox.innerText = "Please enter your email address first.";
-      return;
-    }
-    const actionCodeSettings = {
-      url: window.location.href,
-      handleCodeInApp: true
-    };
-    auth.sendSignInLinkToEmail(email, actionCodeSettings).then(() => {
+    if (!email) return;
+    auth.sendSignInLinkToEmail(email, { url: window.location.href, handleCodeInApp: true }).then(() => {
       window.localStorage.setItem('kulvansh_emailForSignIn', email);
-      okBox.innerText = `✅ Sign-in link sent to ${email}! Open your email inbox and tap the link to enter.`;
-    }).catch(err => {
-      errBox.innerText = err.message;
+      document.getElementById('authSuccess').innerText = `✅ Link sent to ${email}!`;
     });
   }
 
@@ -796,7 +660,6 @@ const firebaseConfig = {
       return;
     }
     CURRENT_USER_EMAIL = (user.email || '').toLowerCase();
-
     const cfgRef = db.collection("platform_config").doc("super_admin");
     const cfgDoc = await cfgRef.get();
     if (!cfgDoc.exists) {
@@ -805,11 +668,14 @@ const firebaseConfig = {
     } else {
       PLATFORM_SUPER_ADMIN_EMAIL = (cfgDoc.data().superAdminEmail || '').toLowerCase();
     }
-
     IS_SUPER_ADMIN = (CURRENT_USER_EMAIL === PLATFORM_SUPER_ADMIN_EMAIL);
     document.getElementById('superAdminNewMoolBtn').style.display = IS_SUPER_ADMIN ? 'inline-flex' : 'none';
     document.getElementById('superAdminTabBtn').style.display = IS_SUPER_ADMIN ? 'inline-block' : 'none';
-    document.getElementById('calCityInput').value = DEFAULT_CITY;
+
+    // Load master config from Firestore if stored
+    const confDoc = await db.collection("platform_config").doc("master_dropdowns").get();
+    if (confDoc.exists) { MASTER_CONFIG = confDoc.data(); }
+    populateAllStandardPickers();
 
     initFamiliesListener();
     loadPublicParamparaLibrary();
@@ -820,35 +686,31 @@ const firebaseConfig = {
     db.collection("families").onSnapshot(snapshot => {
       const select = document.getElementById('familyTenantSelect');
       const joinSelect = document.getElementById('joinTargetFamilySelect');
-      select.innerHTML = '';
-      joinSelect.innerHTML = '';
+      select.innerHTML = ''; joinSelect.innerHTML = '';
       ALL_FAMILIES_CACHE = {};
 
-      let accessibleFamilies = [];
+      let accessible = [];
       snapshot.forEach(doc => {
         const fam = doc.data();
         ALL_FAMILIES_CACHE[doc.id] = fam;
         const kartas = (fam.kartas || []).map(x => x.toLowerCase());
         const memEmails = (fam.members || []).map(m => (m.email || '').toLowerCase()).filter(Boolean);
-        const invited = (fam.membersList || []).map(x => x.toLowerCase());
-
-        if (IS_SUPER_ADMIN || kartas.includes(CURRENT_USER_EMAIL) || memEmails.includes(CURRENT_USER_EMAIL) || invited.includes(CURRENT_USER_EMAIL)) {
-          accessibleFamilies.push({ id: doc.id, ...fam });
+        if (IS_SUPER_ADMIN || kartas.includes(CURRENT_USER_EMAIL) || memEmails.includes(CURRENT_USER_EMAIL)) {
+          accessible.push({ id: doc.id, ...fam });
           select.innerHTML += `<option value="${doc.id}">${fam.familyName} (Mool: ${fam.mool || 'Main'})</option>`;
         }
         if (doc.id !== CURRENT_FAMILY_ID) {
-          joinSelect.innerHTML += `<option value="${doc.id}">${fam.familyName} — Mool: ${fam.mool || doc.id} (Kartas: ${(fam.kartas || []).join(', ')})</option>`;
+          joinSelect.innerHTML += `<option value="${doc.id}">${fam.familyName} — Mool: ${fam.mool || doc.id}</option>`;
         }
       });
 
-      if (accessibleFamilies.length === 0) {
+      if (accessible.length === 0) {
         document.getElementById('authScreen').style.display = 'none';
         document.getElementById('appContent').style.display = 'block';
         if (IS_SUPER_ADMIN) openFamilyModal(false);
-        else alert("Welcome! Ask your family Karta or Super Admin to add your email address (" + CURRENT_USER_EMAIL + ") to a family tree.");
       } else {
         if (!CURRENT_FAMILY_ID || !ALL_FAMILIES_CACHE[CURRENT_FAMILY_ID]) {
-          CURRENT_FAMILY_ID = accessibleFamilies[0].id;
+          CURRENT_FAMILY_ID = accessible[0].id;
         }
         select.value = CURRENT_FAMILY_ID;
         activateFamilyTenant(CURRENT_FAMILY_ID);
@@ -877,38 +739,24 @@ const firebaseConfig = {
     document.getElementById('addUtsavBtn').style.display = IS_KARTA ? 'inline-flex' : 'none';
     document.getElementById('addTyoharBtn').style.display = IS_KARTA ? 'inline-flex' : 'none';
 
-    const roleLabel = IS_SUPER_ADMIN ? `🛡️ Super Admin` : (IS_KARTA ? `👑 Karta` : `👁️ Family Member (Read/Self-Edit)`);
-    document.getElementById('roleBadge').innerText = `${roleLabel} • ${CURRENT_USER_EMAIL}`;
-
-    const pendingCount = (data.pendingMembers || []).length;
-    const badge = document.getElementById('approvalBadgeCount');
-    badge.style.display = pendingCount > 0 ? 'inline-block' : 'none';
-    badge.innerText = pendingCount;
-
+    document.getElementById('roleBadge').innerText = IS_SUPER_ADMIN ? `🛡️ Super Admin` : (IS_KARTA ? `👑 Karta` : `👁️ Member`);
     renderAll();
   }
 
-  // ============================================================================
-  // 4. SUPER ADMIN & KARTA MOOL MANAGEMENT + KARTA PROMOTION
-  // ============================================================================
+  // Difference between New Mool/Khandaan vs Mool Settings
   function openFamilyModal(isEdit) {
-    if (!isEdit && !IS_SUPER_ADMIN) {
-      alert("Only the Platform Super Admin can create a new Mool/Khandaan.");
-      return;
-    }
+    if (!isEdit && !IS_SUPER_ADMIN) return alert("Only Super Admin can create a brand-new Mool/Khandaan tenant.");
     document.getElementById('f_mode').value = isEdit ? 'edit' : 'create';
-    document.getElementById('familyModalTitle').innerText = isEdit ? '✏️ Edit Family Mool & Kartas' : '🛡️ Super Admin: Create New Mool & Assign Karta';
+    document.getElementById('familyModalTitle').innerText = isEdit ? '🏛️ Mool Settings (Edit Current Active Hub)' : '🛡️ Super Admin: Create New Mool/Khandaan Tenant';
     if (isEdit && ACTIVE_FAMILY_DATA) {
       document.getElementById('f_name').value = ACTIVE_FAMILY_DATA.familyName || '';
       document.getElementById('f_mool').value = ACTIVE_FAMILY_DATA.mool || '';
-      document.getElementById('f_gotra').value = ACTIVE_FAMILY_DATA.defaultGotra || '';
-      document.getElementById('f_tz').value = ACTIVE_FAMILY_DATA.defaultTz || DEFAULT_TZ;
+      document.getElementById('f_gotra').value = ACTIVE_FAMILY_DATA.defaultGotra || MASTER_CONFIG.gotras[0];
+      document.getElementById('f_tz').value = ACTIVE_FAMILY_DATA.defaultTz || TRUSTED_TIMEZONES[0];
       document.getElementById('f_kartas').value = (ACTIVE_FAMILY_DATA.kartas || []).join(', ');
     } else {
       document.getElementById('f_name').value = '';
       document.getElementById('f_mool').value = '';
-      document.getElementById('f_gotra').value = '';
-      document.getElementById('f_tz').value = DEFAULT_TZ;
       document.getElementById('f_kartas').value = CURRENT_USER_EMAIL;
     }
     document.getElementById('familyModal').style.display = 'flex';
@@ -916,10 +764,10 @@ const firebaseConfig = {
 
   async function saveFamilyMool() {
     const mode = document.getElementById('f_mode').value;
-    const familyName = document.getElementById('f_name').value.trim() || 'New Family Vansh';
-    const mool = document.getElementById('f_mool').value.trim() || 'Main Branch';
-    const defaultGotra = document.getElementById('f_gotra').value.trim();
-    const defaultTz = document.getElementById('f_tz').value.trim() || DEFAULT_TZ;
+    const familyName = document.getElementById('f_name').value.trim() || 'Family Vansh';
+    const mool = document.getElementById('f_mool').value.trim() || 'Main';
+    const defaultGotra = document.getElementById('f_gotra').value;
+    const defaultTz = document.getElementById('f_tz').value;
     const kartas = document.getElementById('f_kartas').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
 
     if (mode === 'edit' && CURRENT_FAMILY_ID) {
@@ -929,68 +777,122 @@ const firebaseConfig = {
       CURRENT_FAMILY_ID = newId;
       await db.collection("families").doc(newId).set({
         familyName, mool, defaultGotra, defaultTz, kartas,
-        membersList: kartas,
-        joinedFamilies: [],
-        members: [],
-        pendingMembers: [],
-        utsavs: [],
-        tyohars: []
+        membersList: kartas, joinedFamilies: [], members: [], pendingMembers: [], utsavs: [], tyohars: []
       });
     }
     closeModals();
   }
 
-  async function promoteMemberToKarta(memberEmail, memberName) {
-    if (!IS_KARTA) return;
-    if (!memberEmail) {
-      alert("Please add an email address to this member's profile first so they can be granted Karta access.");
-      return;
-    }
-    const cleanEmail = memberEmail.toLowerCase().trim();
-    const kartas = ACTIVE_FAMILY_DATA.kartas || [];
-    if (!kartas.includes(cleanEmail)) {
-      kartas.push(cleanEmail);
-      await db.collection("families").doc(CURRENT_FAMILY_ID).update({ kartas });
-      alert(`👑 ${memberName} (${cleanEmail}) now has full Karta privileges for ${ACTIVE_FAMILY_DATA.familyName}!`);
-    }
+  // Config Dropdowns Manager
+  function renderConfigValues() {
+    const cat = document.getElementById('configCatSelect').value;
+    const list = MASTER_CONFIG[cat] || [];
+    const container = document.getElementById('configValuesList');
+    container.innerHTML = list.map((val, idx) => `
+      <span style="background:#fff3e0; border:1px solid var(--border); padding:4px 8px; border-radius:6px; font-size:0.8rem; display:inline-flex; align-items:center; gap:6px;">
+        ${val} <button type="button" class="btn btn-danger btn-sm" style="padding:1px 4px;" onclick="removeMasterConfigValue('${cat}', ${idx})">✕</button>
+      </span>
+    `).join('');
   }
 
-  // ============================================================================
-  // 5. SMART 18+ PARENT FILTER, INLINE PARENT CREATION & CROSS-KARTA MATCHING
-  // ============================================================================
-  function populateParentDropdowns(childDob, currentMemberId, selectedFatherId = '', selectedMotherId = '') {
-    const members = ACTIVE_FAMILY_DATA ? (ACTIVE_FAMILY_DATA.members || []) : [];
+  async function addMasterConfigValue() {
+    const cat = document.getElementById('configCatSelect').value;
+    const val = document.getElementById('configNewValueInput').value.trim();
+    if (!val) return;
+    MASTER_CONFIG[cat].push(val);
+    document.getElementById('configNewValueInput').value = '';
+    await db.collection("platform_config").doc("master_dropdowns").set(MASTER_CONFIG);
+    populateAllStandardPickers();
+    renderConfigValues();
+  }
+
+  async function removeMasterConfigValue(cat, idx) {
+    MASTER_CONFIG[cat].splice(idx, 1);
+    await db.collection("platform_config").doc("master_dropdowns").set(MASTER_CONFIG);
+    populateAllStandardPickers();
+    renderConfigValues();
+  }
+
+  // Jyotish Engine
+  const NAKSHATRAS = ["Ashwini","Bharani","Krittika","Rohini","Mrigashira","Ardra","Punarvasu","Pushya","Ashlesha","Magha","Purva Phalguni","Uttara Phalguni","Hasta","Chitra","Swati","Vishakha","Anuradha","Jyeshtha","Mula","Purva Ashadha","Uttara Ashadha","Shravana","Dhanishta","Shatabhisha","Purva Bhadrapada","Uttara Bhadrapada","Revati"];
+  const RASHIS = ["Mesha (Aries)","Vrishabha (Taurus)","Mithuna (Gemini)","Karka (Cancer)","Simha (Leo)","Kanya (Virgo)","Tula (Libra)","Vrishchika (Scorpio)","Dhanu (Sagittarius)","Makara (Capricorn)","Kumbha (Aquarius)","Meena (Pisces)"];
+  const TITHI_NAMES = ["Pratipada","Dwitiya","Tritiya","Chaturthi","Panchami","Shashthi","Saptami","Ashtami","Navami","Dashami","Ekadashi","Dwadashi","Trayodashi","Chaturdashi","Purnima / Amavasya"];
+  const HINDU_MASAS = ["Chaitra","Vaishakha","Jyeshtha","Ashadha","Shravana","Bhadrapada","Ashwin","Kartika","Margashirsha","Pausha","Magha","Phalguna"];
+
+  function computeVedicPanchangFromDate(dateObj) {
+    const jd = (dateObj.getTime() / 86400000) + 2440587.5;
+    const d = jd - 2451545.0;
+    const L_sun = (280.460 + 0.9856474 * d) % 360;
+    const g_sun = ((357.528 + 0.9856003 * d) % 360) * Math.PI / 180;
+    const lambda_sun = (L_sun + 1.915 * Math.sin(g_sun) + 360) % 360;
+    const L_moon = (218.316 + 13.176396 * d) % 360;
+    const M_moon = ((134.963 + 13.064993 * d) % 360) * Math.PI / 180;
+    const lambda_moon = (L_moon + 6.289 * Math.sin(M_moon) + 360) % 360;
+    const yearFrac = dateObj.getUTCFullYear() + (dateObj.getUTCMonth() / 12);
+    const ayanamsa = 23.85 + (yearFrac - 2000) * 0.01397;
+    const siderealMoon = (lambda_moon - ayanamsa + 360) % 360;
+    const siderealSun = (lambda_sun - ayanamsa + 360) % 360;
+    const nakSpan = 360 / 27;
+    const nakIndex = Math.floor(siderealMoon / nakSpan);
+    const pada = Math.floor((siderealMoon % nakSpan) / (nakSpan / 4)) + 1;
+    const rashiIndex = Math.floor(siderealMoon / 30);
+    const diff = (lambda_moon - lambda_sun + 360) % 360;
+    const tithiNum = Math.floor(diff / 12) + 1;
+    const paksha = tithiNum <= 15 ? "Shukla" : "Krishna";
+    let tithiName = TITHI_NAMES[(tithiNum - 1) % 15];
+    const sunRashiIndex = Math.floor(siderealSun / 30);
+    const masa = HINDU_MASAS[(sunRashiIndex + 1) % 12];
+    const vsYear = dateObj.getMonth() >= 3 ? dateObj.getFullYear() + 57 : dateObj.getFullYear() + 56;
+    return {
+      nakshatra: NAKSHATRAS[nakIndex], pada: `Pada ${pada}`, rashi: RASHIS[rashiIndex],
+      shortTithi: `${masa} ${paksha} ${tithiName}`, fullTithi: `${masa} ${paksha} ${tithiName} (VS ${vsYear})`, vsYear
+    };
+  }
+
+  function autoCalculateVedicDetails() {
+    const dob = document.getElementById('m_dob').value;
+    const tob = document.getElementById('m_tob').value || "12:00";
+    if (!dob) return;
+    const [yyyy, mm, dd] = dob.split('-').map(Number);
+    const [hh, min] = tob.split(':').map(Number);
+    const p = computeVedicPanchangFromDate(new Date(Date.UTC(yyyy, mm - 1, dd, hh, min) - 19800000));
+    document.getElementById('m_rashi').value = p.rashi;
+    document.getElementById('m_nakshatra').value = p.nakshatra;
+    document.getElementById('m_pada').value = p.pada;
+    document.getElementById('m_tithi').value = p.fullTithi;
+    document.getElementById('panchangCalcStatus').innerText = `✅ Jyotish Computed Successfully`;
+  }
+
+  // Member Modal & 12-Year Window & Wife Link
+  function populateParentDropdowns(childDob, currentId, selF = '', selM = '') {
+    const members = ACTIVE_FAMILY_DATA ? ACTIVE_FAMILY_DATA.members || [] : [];
     const childYear = childDob ? new Date(childDob).getFullYear() : null;
+    const eligible = members.filter(m => m.id !== currentId && (!childYear || !m.dob || (childYear - new Date(m.dob).getFullYear()) >= 18));
+    const fSel = document.getElementById('m_fatherId');
+    const mSel = document.getElementById('m_motherId');
+    const opts = `<option value="">-- Unknown --</option><option value="__ADD_NEW__">➕ Add New Parent Inline...</option>` + eligible.map(p => `<option value="${p.id}">${p.name} (DOB: ${p.dob || 'Unknown'})</option>`).join('');
+    fSel.innerHTML = opts; mSel.innerHTML = opts;
+    if (selF) fSel.value = selF; if (selM) mSel.value = selM;
+    checkParentInlineToggle('father'); checkParentInlineToggle('mother');
+  }
 
-    const eligibleParents = members.filter(m => {
-      if (m.id === currentMemberId) return false;
-      if (!childYear || !m.dob) return true;
-      const parentYear = new Date(m.dob).getFullYear();
-      return (childYear - parentYear) >= 18;
-    });
+  function populateWifeDropdown(currentId, selWifeId = '') {
+    const members = ACTIVE_FAMILY_DATA ? ACTIVE_FAMILY_DATA.members || [] : [];
+    const females = members.filter(m => m.id !== currentId && m.gender === 'Female');
+    const wSel = document.getElementById('m_wifeId');
+    wSel.innerHTML = `<option value="">-- No Linked Wife / Maiden --</option>` + females.map(f => `<option value="${f.id}">${f.name} (DOB: ${f.dob || 'Unknown'})</option>`).join('');
+    if (selWifeId) wSel.value = selWifeId;
+  }
 
-    const fSelect = document.getElementById('m_fatherId');
-    const mSelect = document.getElementById('m_motherId');
-
-    const optionsHtml = `<option value="">-- Unknown / Root Ancestor --</option>`
-      + `<option value="__ADD_NEW__">➕ Add New Parent Inline (Not in list)...</option>`
-      + eligibleParents.map(p => `<option value="${p.id}">${p.name} (DOB: ${p.dob || 'Unknown'} • ${p.pob || ''})</option>`).join('');
-
-    fSelect.innerHTML = optionsHtml;
-    mSelect.innerHTML = optionsHtml;
-    if (selectedFatherId) fSelect.value = selectedFatherId;
-    if (selectedMotherId) mSelect.value = selectedMotherId;
-
-    checkParentInlineToggle('father');
-    checkParentInlineToggle('mother');
+  function toggleWifeField() {
+    const g = document.getElementById('m_gender').value;
+    document.getElementById('wifeFieldContainer').style.display = (g === 'Male') ? 'block' : 'none';
   }
 
   function onChildDobChanged() {
     const dob = document.getElementById('m_dob').value;
     const id = document.getElementById('m_id').value;
-    const curF = document.getElementById('m_fatherId').value;
-    const curM = document.getElementById('m_motherId').value;
-    populateParentDropdowns(dob, id, curF, curM);
+    populateParentDropdowns(dob, id);
     autoCalculateVedicDetails();
   }
 
@@ -999,95 +901,39 @@ const firebaseConfig = {
     document.getElementById(which === 'father' ? 'inlineFatherBox' : 'inlineMotherBox').style.display = (sel === '__ADD_NEW__') ? 'block' : 'none';
   }
 
-  function checkCrossKartaParentMatch(which) {
-    const nameInput = document.getElementById(`new_${which}_name`).value.trim().toLowerCase();
-    const dobInput = document.getElementById(`new_${which}_dob`).value;
-    const pobInput = document.getElementById(`new_${which}_pob`).value.trim().toLowerCase();
-    const banner = document.getElementById('crossKartaSuggestionBanner');
-
-    if (nameInput.length < 3) {
-      banner.style.display = 'none';
-      return;
-    }
-
-    let matches = [];
-    Object.keys(ALL_FAMILIES_CACHE).forEach(famId => {
-      if (famId === CURRENT_FAMILY_ID) return;
-      const fam = ALL_FAMILIES_CACHE[famId];
-      (fam.members || []).forEach(m => {
-        const mName = (m.name || '').trim().toLowerCase();
-        if (mName === nameInput) {
-          const dobMatch = (!dobInput || !m.dob || dobInput === m.dob);
-          const pobMatch = (!pobInput || !m.pob || m.pob.toLowerCase().includes(pobInput) || pobInput.includes(m.pob.toLowerCase()));
-          if (dobMatch && pobMatch) {
-            matches.push({ famId, familyName: fam.familyName, mool: fam.mool, member: m });
-          }
-        }
-      });
-    });
-
-    if (matches.length > 0) {
-      const hit = matches[0];
-      banner.style.display = 'block';
-      banner.innerHTML = `🔗 <strong>Ancestor Match Found in Another Karta's Tree!</strong><br>
-        <strong>${hit.member.name}</strong> (DOB: ${hit.member.dob || 'Unknown'}, Place: ${hit.member.pob || 'Unknown'}) already exists in <strong>${hit.familyName} (${hit.mool})</strong>.<br>
-        <button type="button" class="btn btn-sm" style="margin-top:6px; background:var(--blue);" onclick="quickProposeCrossJoin('${hit.famId}','${hit.member.name}')">🤝 Propose Joining Trees with ${hit.familyName}</button>`;
-    } else {
-      banner.style.display = 'none';
-    }
-  }
-
-  async function quickProposeCrossJoin(targetFamId, ancestorName) {
-    await db.collection("join_requests").add({
-      fromFamilyId: CURRENT_FAMILY_ID,
-      fromFamilyName: ACTIVE_FAMILY_DATA.familyName,
-      toFamilyId: targetFamId,
-      toFamilyName: ALL_FAMILIES_CACHE[targetFamId]?.familyName || targetFamId,
-      myAnchor: `Shared Ancestor: ${ancestorName}`,
-      status: "PENDING",
-      createdAt: new Date().toISOString()
-    });
-    alert(`📨 Vansh-Milan request sent to ${ALL_FAMILIES_CACHE[targetFamId]?.familyName} for shared ancestor ${ancestorName}!`);
-  }
-
-  // ============================================================================
-  // 6. SAVE MEMBER (WITH INLINE PARENT CREATION & NON-KARTA APPROVAL QUEUE)
-  // ============================================================================
   function openMemberModal(editId = null) {
     document.getElementById('m_id').value = editId || '';
     document.getElementById('panchangCalcStatus').innerText = '';
-    document.getElementById('crossKartaSuggestionBanner').style.display = 'none';
-    ['new_father_name','new_father_dob','new_father_pob','new_mother_name','new_mother_dob','new_mother_pob'].forEach(id => document.getElementById(id).value = '');
+    ['new_father_name','new_father_dob','new_mother_name','new_mother_dob'].forEach(id => document.getElementById(id).value = '');
 
     if (editId && ACTIVE_FAMILY_DATA) {
       const m = (ACTIVE_FAMILY_DATA.members || []).find(x => x.id === editId);
       if (m) {
-        if (!IS_KARTA && (m.email || '').toLowerCase() !== CURRENT_USER_EMAIL) {
-          alert("Read-Only Access: You can only edit your own profile card, or submit a new person for Karta approval.");
-          return;
-        }
-        document.getElementById('memberModalTitle').innerText = '✏️ Edit Member Details';
+        document.getElementById('memberModalTitle').innerText = '✏️ Edit Member';
         document.getElementById('m_name').value = m.name || '';
-        document.getElementById('m_branch').value = m.branch || '';
-        document.getElementById('m_gotra').value = m.gotra || '';
+        document.getElementById('m_gender').value = m.gender || 'Male';
+        document.getElementById('m_gotra').value = m.gotra || MASTER_CONFIG.gotras[0];
         document.getElementById('m_email').value = m.email || '';
         document.getElementById('m_phone').value = m.phone || '';
-        document.getElementById('m_residence').value = m.residence || '';
+        document.getElementById('m_residence').value = m.residence || TRUSTED_CITIES[0];
         document.getElementById('m_dob').value = m.dob || '';
         document.getElementById('m_tob').value = m.tob || '12:00';
-        document.getElementById('m_pob').value = m.pob || '';
+        document.getElementById('m_pob').value = m.pob || TRUSTED_CITIES[0];
         document.getElementById('m_rashi').value = m.rashi || '';
         document.getElementById('m_nakshatra').value = m.nakshatra || '';
         document.getElementById('m_pada').value = m.pada || '';
         document.getElementById('m_tithi').value = m.tithi || '';
-        document.getElementById('m_spouse').value = m.spouse || '';
+        toggleWifeField();
         populateParentDropdowns(m.dob, m.id, m.fatherId || '', m.motherId || '');
+        populateWifeDropdown(m.id, m.wifeId || '');
       }
     } else {
-      document.getElementById('memberModalTitle').innerText = IS_KARTA ? '🌿 Add Family Member' : '🌿 Propose New Family Member (Subject to Karta Approval)';
-      ['m_name','m_branch','m_email','m_phone','m_residence','m_dob','m_pob','m_rashi','m_nakshatra','m_pada','m_tithi','m_spouse'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('m_gotra').value = (ACTIVE_FAMILY_DATA && ACTIVE_FAMILY_DATA.defaultGotra) || '';
+      document.getElementById('memberModalTitle').innerText = '🌿 Add Family Member';
+      ['m_name','m_email','m_phone','m_dob','m_rashi','m_nakshatra','m_pada','m_tithi'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('m_gender').value = 'Male';
+      toggleWifeField();
       populateParentDropdowns('', '');
+      populateWifeDropdown('');
     }
     document.getElementById('memberModal').style.display = 'flex';
   }
@@ -1095,33 +941,17 @@ const firebaseConfig = {
   async function createInlineParentIfNeeded(which, list) {
     const selVal = document.getElementById(which === 'father' ? 'm_fatherId' : 'm_motherId').value;
     if (selVal !== '__ADD_NEW__') return selVal;
-
     const pName = document.getElementById(`new_${which}_name`).value.trim();
     const pDob = document.getElementById(`new_${which}_dob`).value;
-    const pPob = document.getElementById(`new_${which}_pob`).value.trim();
+    const pPob = document.getElementById(`new_${which}_pob`).value;
     if (!pName) return '';
-
-    const newParentId = 'M' + Date.now() + '_' + which.charAt(0).toUpperCase();
-    let pJyotish = { rashi: '', nakshatra: '', pada: '', fullTithi: '' };
-    if (pDob) {
-      pJyotish = computeVedicPanchangFromDate(new Date(pDob + "T12:00:00Z"));
-    }
+    const newId = 'M' + Date.now() + '_' + which.charAt(0).toUpperCase();
+    let pJyotish = pDob ? computeVedicPanchangFromDate(new Date(pDob + "T12:00:00Z")) : {};
     list.push({
-      id: newParentId,
-      name: pName,
-      branch: which === 'father' ? 'Father / Ancestor' : 'Mother / Ancestor',
-      gotra: document.getElementById('m_gotra').value.trim(),
-      dob: pDob,
-      tob: '12:00',
-      pob: pPob,
-      rashi: pJyotish.rashi,
-      nakshatra: pJyotish.nakshatra,
-      pada: pJyotish.pada,
-      tithi: pJyotish.fullTithi,
-      fatherId: '',
-      motherId: ''
+      id: newId, name: pName, gender: which === 'father' ? 'Male' : 'Female', gotra: MASTER_CONFIG.gotras[0],
+      dob: pDob, pob: pPob, rashi: pJyotish.rashi || '', nakshatra: pJyotish.nakshatra || '', pada: pJyotish.pada || '', tithi: pJyotish.fullTithi || ''
     });
-    return newParentId;
+    return newId;
   }
 
   async function saveMember() {
@@ -1132,83 +962,46 @@ const firebaseConfig = {
 
     const fatherId = await createInlineParentIfNeeded('father', members);
     const motherId = await createInlineParentIfNeeded('mother', members);
-
-    const fatherNode = members.find(x => x.id === fatherId);
-    const motherNode = members.find(x => x.id === motherId);
     const emailVal = document.getElementById('m_email').value.trim().toLowerCase();
+    if (emailVal && !membersList.includes(emailVal)) membersList.push(emailVal);
 
-    if (emailVal && !membersList.includes(emailVal)) {
-      membersList.push(emailVal);
+    // 12-Year Age Difference Window Enforcement for Wife
+    const wifeId = document.getElementById('m_wifeId').value;
+    if (wifeId) {
+      const selfDob = document.getElementById('m_dob').value;
+      const wifeObj = members.find(x => x.id === wifeId);
+      if (selfDob && wifeObj && wifeObj.dob) {
+        const diffYears = Math.abs(new Date(selfDob).getFullYear() - new Date(wifeObj.dob).getFullYear());
+        if (diffYears > 12) {
+          document.getElementById('wifeAgeWarning').innerText = `⚠️ Warning: Age difference is ${diffYears} years (exceeds 12-year recommended window).`;
+          if (!confirm("The age difference between husband and wife exceeds 12 years. Proceed anyway?")) return;
+        }
+      }
     }
 
-    const existing = members.find(x => x.id === id) || {};
     const memberObj = {
-      ...existing,
-      id,
-      name: document.getElementById('m_name').value.trim(),
-      branch: document.getElementById('m_branch').value.trim(),
-      gotra: document.getElementById('m_gotra').value.trim(),
-      email: emailVal,
-      phone: document.getElementById('m_phone').value.trim(),
-      residence: document.getElementById('m_residence').value.trim(),
-      dob: document.getElementById('m_dob').value,
-      tob: document.getElementById('m_tob').value,
-      pob: document.getElementById('m_pob').value.trim(),
-      rashi: document.getElementById('m_rashi').value.trim(),
-      nakshatra: document.getElementById('m_nakshatra').value.trim(),
-      pada: document.getElementById('m_pada').value.trim(),
-      tithi: document.getElementById('m_tithi').value.trim(),
-      fatherId,
-      motherId,
-      fatherName: fatherNode ? fatherNode.name : '',
-      motherName: motherNode ? motherNode.name : '',
-      spouse: document.getElementById('m_spouse').value.trim()
+      id, name: document.getElementById('m_name').value.trim(),
+      gender: document.getElementById('m_gender').value,
+      gotra: document.getElementById('m_gotra').value,
+      email: emailVal, phone: document.getElementById('m_phone').value.trim(),
+      residence: document.getElementById('m_residence').value,
+      dob: document.getElementById('m_dob').value, tob: document.getElementById('m_tob').value,
+      pob: document.getElementById('m_pob').value, rashi: document.getElementById('m_rashi').value.trim(),
+      nakshatra: document.getElementById('m_nakshatra').value.trim(), pada: document.getElementById('m_pada').value.trim(),
+      tithi: document.getElementById('m_tithi').value.trim(), fatherId, motherId, wifeId
     };
-
-    if (!IS_KARTA && !editId) {
-      const pending = ACTIVE_FAMILY_DATA.pendingMembers || [];
-      pending.push({ ...memberObj, submittedBy: CURRENT_USER_EMAIL });
-      await db.collection("families").doc(CURRENT_FAMILY_ID).update({ pendingMembers: pending });
-      alert("⏳ Submitted! Your family Karta will review and approve this new member addition.");
-      closeModals();
-      return;
-    }
 
     const idx = members.findIndex(x => x.id === id);
     if (idx >= 0) members[idx] = memberObj; else members.push(memberObj);
-
     await db.collection("families").doc(CURRENT_FAMILY_ID).update({ members, membersList });
     closeModals();
   }
 
-  async function approvePendingMember(id) {
-    if (!IS_KARTA) return;
-    const pending = ACTIVE_FAMILY_DATA.pendingMembers || [];
-    const target = pending.find(x => x.id === id);
-    if (!target) return;
-
-    const remaining = pending.filter(x => x.id !== id);
-    const members = ACTIVE_FAMILY_DATA.members || [];
-    const membersList = ACTIVE_FAMILY_DATA.membersList || [];
-    if (target.email && !membersList.includes(target.email)) membersList.push(target.email);
-    members.push(target);
-
-    await db.collection("families").doc(CURRENT_FAMILY_ID).update({ members, membersList, pendingMembers: remaining });
-  }
-
-  async function rejectPendingMember(id) {
-    if (!IS_KARTA) return;
-    const remaining = (ACTIVE_FAMILY_DATA.pendingMembers || []).filter(x => x.id !== id);
-    await db.collection("families").doc(CURRENT_FAMILY_ID).update({ pendingMembers: remaining });
-  }
-
-  // ============================================================================
-  // 7. PITRU / SWARGवास & CREMATION SECTION
-  // ============================================================================
+  // Pitru / Swargwas & Cremation Modal
   function openPitruModal(memberId = null) {
     const sel = document.getElementById('p_memberId');
     const members = ACTIVE_FAMILY_DATA ? (ACTIVE_FAMILY_DATA.members || []) : [];
-    sel.innerHTML = members.map(m => `<option value="${m.id}">${m.name} (${m.branch || 'Member'})</option>`).join('');
+    sel.innerHTML = members.map(m => `<option value="${m.id}">${m.name} (${m.gender})</option>`).join('');
     if (memberId) sel.value = memberId;
     loadPitruMemberFields();
     document.getElementById('pitruModal').style.display = 'flex';
@@ -1219,9 +1012,9 @@ const firebaseConfig = {
     const m = (ACTIVE_FAMILY_DATA?.members || []).find(x => x.id === id);
     if (!m) return;
     document.getElementById('p_dod').value = m.dod || '';
-    document.getElementById('p_pod').value = m.pod || '';
+    document.getElementById('p_pod').value = m.pod || TRUSTED_CITIES[0];
     document.getElementById('p_doc').value = m.doc || '';
-    document.getElementById('p_poc').value = m.poc || '';
+    document.getElementById('p_poc').value = m.poc || TRUSTED_CITIES[0];
     document.getElementById('p_shraddhaTithi').value = m.shraddhaTithi || '';
     document.getElementById('p_notes').value = m.pitruNotes || '';
   }
@@ -1238,14 +1031,10 @@ const firebaseConfig = {
     const members = [...(ACTIVE_FAMILY_DATA.members || [])];
     const idx = members.findIndex(x => x.id === id);
     if (idx < 0) return;
-
     members[idx] = {
-      ...members[idx],
-      isDeceased: true,
-      dod: document.getElementById('p_dod').value,
-      pod: document.getElementById('p_pod').value.trim(),
-      doc: document.getElementById('p_doc').value,
-      poc: document.getElementById('p_poc').value.trim(),
+      ...members[idx], isDeceased: true,
+      dod: document.getElementById('p_dod').value, pod: document.getElementById('p_pod').value,
+      doc: document.getElementById('p_doc').value, poc: document.getElementById('p_poc').value,
       shraddhaTithi: document.getElementById('p_shraddhaTithi').value.trim(),
       pitruNotes: document.getElementById('p_notes').value.trim()
     };
@@ -1253,26 +1042,23 @@ const firebaseConfig = {
     closeModals();
   }
 
-  // ============================================================================
-  // 8. STRUCTURED RASOI DISH -> INGREDIENTS & SAMAGRI LIST BUILDERS
-  // ============================================================================
+  // Structured Rasoi & Samagri
   function addRasoiDishRow(containerId, dishName = '', ingredientsArr = []) {
     const container = document.getElementById(containerId);
     const dishDiv = document.createElement('div');
     dishDiv.className = 'dish-item-box';
     const ingHtml = (ingredientsArr.length ? ingredientsArr : [{ item: '', qty: '' }]).map(ing => `
       <div style="display:flex; gap:6px; margin-top:5px;" class="ing-row">
-        <input type="text" class="ing-name" placeholder="Ingredient (e.g., Besan, Ghee, Kesar)" value="${ing.item || ''}">
-        <input type="text" class="ing-qty" placeholder="Qty (e.g., 500g, 2 tbsp)" value="${ing.qty || ''}" style="max-width:140px;">
+        <input type="text" class="ing-name" placeholder="Ingredient (e.g., Besan, Ghee)" value="${ing.item || ''}">
+        <input type="text" class="ing-qty" placeholder="Qty" value="${ing.qty || ''}" style="max-width:130px;">
         <button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>
       </div>
     `).join('');
-
     dishDiv.innerHTML = `
       <div style="display:flex; gap:8px; align-items:center;">
-        <input type="text" class="dish-title" placeholder="🍲 Dish Name (e.g., Panchamrit / Annakut Sabzi / Boondi Ladoo)" value="${dishName}" style="font-weight:700;">
+        <input type="text" class="dish-title" placeholder="🍲 Dish Name" value="${dishName}" style="font-weight:700;">
         <button type="button" class="btn btn-outline btn-sm" onclick="addIngredientToDish(this)">+ Ingredient</button>
-        <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.dish-item-box').remove()">🗑️ Dish</button>
+        <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.dish-item-box').remove()">🗑️</button>
       </div>
       <div class="ing-list">${ingHtml}</div>
     `;
@@ -1281,27 +1067,15 @@ const firebaseConfig = {
 
   function addIngredientToDish(btn) {
     const list = btn.closest('.dish-item-box').querySelector('.ing-list');
-    const row = document.createElement('div');
-    row.className = 'ing-row';
-    row.style.cssText = 'display:flex; gap:6px; margin-top:5px;';
-    row.innerHTML = `
-      <input type="text" class="ing-name" placeholder="Ingredient Name">
-      <input type="text" class="ing-qty" placeholder="Qty" style="max-width:140px;">
-      <button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>
-    `;
+    const row = document.createElement('div'); row.className = 'ing-row'; row.style.cssText = 'display:flex; gap:6px; margin-top:5px;';
+    row.innerHTML = `<input type="text" class="ing-name" placeholder="Ingredient"><input type="text" class="ing-qty" placeholder="Qty" style="max-width:130px;"><button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>`;
     list.appendChild(row);
   }
 
   function addSamagriRow(containerId, name = '', qty = '') {
     const container = document.getElementById(containerId);
-    const row = document.createElement('div');
-    row.className = 'samagri-row';
-    row.style.cssText = 'display:flex; gap:6px; margin-bottom:6px;';
-    row.innerHTML = `
-      <input type="text" class="sam-name" placeholder="🪔 Samagri Item (e.g., Roli, Akshat, Supari, Kalash)" value="${name}">
-      <input type="text" class="sam-qty" placeholder="Qty / Note" value="${qty}" style="max-width:150px;">
-      <button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>
-    `;
+    const row = document.createElement('div'); row.className = 'samagri-row'; row.style.cssText = 'display:flex; gap:6px; margin-bottom:6px;';
+    row.innerHTML = `<input type="text" class="sam-name" placeholder="🪔 Samagri Item" value="${name}"><input type="text" class="sam-qty" placeholder="Qty" value="${qty}" style="max-width:140px;"><button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">✕</button>`;
     container.appendChild(row);
   }
 
@@ -1336,28 +1110,22 @@ const firebaseConfig = {
     document.getElementById('u_id').value = editId || '';
     document.getElementById('u_rasoiBuilder').innerHTML = '';
     document.getElementById('u_samagriBuilder').innerHTML = '';
-
     if (editId && ACTIVE_FAMILY_DATA) {
       const u = (ACTIVE_FAMILY_DATA.utsavs || []).find(x => x.id === editId);
       if (u) {
-        document.getElementById('u_type').value = u.type || 'Vivah / Shaadi';
+        document.getElementById('u_type').value = u.type || MASTER_CONFIG.utsavTypes[0];
         document.getElementById('u_title').value = u.title || '';
         document.getElementById('u_date').value = u.date || '';
-        document.getElementById('u_venue').value = u.venue || DEFAULT_CITY;
-        document.getElementById('u_tz').value = u.tz || DEFAULT_TZ;
+        document.getElementById('u_venue').value = u.venue || TRUSTED_CITIES[0];
+        document.getElementById('u_tz').value = u.tz || TRUSTED_TIMEZONES[0];
         document.getElementById('u_tithi').value = u.tithi || '';
         document.getElementById('u_notes').value = u.notes || '';
-        document.getElementById('u_public').checked = !!u.isPublic;
         (u.rasoiList || []).forEach(d => addRasoiDishRow('u_rasoiBuilder', d.dish, d.ingredients));
         (u.samagriList || []).forEach(s => addSamagriRow('u_samagriBuilder', s.item, s.qty));
       }
     } else {
       ['u_title','u_date','u_tithi','u_notes'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('u_venue').value = DEFAULT_CITY;
-      document.getElementById('u_tz').value = DEFAULT_TZ;
-      document.getElementById('u_public').checked = false;
-      addRasoiDishRow('u_rasoiBuilder');
-      addSamagriRow('u_samagriBuilder');
+      addRasoiDishRow('u_rasoiBuilder'); addSamagriRow('u_samagriBuilder');
     }
     document.getElementById('utsavModal').style.display = 'flex';
   }
@@ -1365,30 +1133,16 @@ const firebaseConfig = {
   async function saveUtsav() {
     const id = document.getElementById('u_id').value || ('U' + Date.now());
     const obj = {
-      id,
-      type: document.getElementById('u_type').value,
-      title: document.getElementById('u_title').value.trim(),
-      date: document.getElementById('u_date').value,
-      venue: document.getElementById('u_venue').value.trim(),
-      tz: document.getElementById('u_tz').value.trim(),
-      tithi: document.getElementById('u_tithi').value.trim(),
-      rasoiList: collectRasoiList('u_rasoiBuilder'),
-      samagriList: collectSamagriList('u_samagriBuilder'),
-      notes: document.getElementById('u_notes').value.trim(),
-      isPublic: document.getElementById('u_public').checked
+      id, type: document.getElementById('u_type').value, title: document.getElementById('u_title').value.trim(),
+      date: document.getElementById('u_date').value, venue: document.getElementById('u_venue').value,
+      tz: document.getElementById('u_tz').value, tithi: document.getElementById('u_tithi').value.trim(),
+      rasoiList: collectRasoiList('u_rasoiBuilder'), samagriList: collectSamagriList('u_samagriBuilder'),
+      notes: document.getElementById('u_notes').value.trim(), isPublic: document.getElementById('u_public').checked
     };
     const list = [...(ACTIVE_FAMILY_DATA.utsavs || [])];
     const idx = list.findIndex(x => x.id === id);
     if (idx >= 0) list[idx] = obj; else list.push(obj);
     await db.collection("families").doc(CURRENT_FAMILY_ID).update({ utsavs: list });
-
-    if (obj.isPublic) {
-      await db.collection("public_traditions").doc(`PUB_${CURRENT_FAMILY_ID}_${id}`).set({
-        sourceFamily: ACTIVE_FAMILY_DATA.familyName,
-        sourceMool: ACTIVE_FAMILY_DATA.mool || '',
-        ...obj
-      });
-    }
     closeModals();
   }
 
@@ -1396,28 +1150,22 @@ const firebaseConfig = {
     document.getElementById('t_id').value = editId || '';
     document.getElementById('t_rasoiBuilder').innerHTML = '';
     document.getElementById('t_samagriBuilder').innerHTML = '';
-
     if (editId && ACTIVE_FAMILY_DATA) {
       const t = (ACTIVE_FAMILY_DATA.tyohars || []).find(x => x.id === editId);
       if (t) {
         document.getElementById('t_name').value = t.name || '';
         document.getElementById('t_date').value = t.date || '';
-        document.getElementById('t_location').value = t.location || DEFAULT_CITY;
-        document.getElementById('t_tz').value = t.tz || DEFAULT_TZ;
+        document.getElementById('t_location').value = t.location || TRUSTED_CITIES[0];
+        document.getElementById('t_tz').value = t.tz || TRUSTED_TIMEZONES[0];
         document.getElementById('t_masa').value = t.masa || '';
         document.getElementById('t_tithi').value = t.tithi || '';
         document.getElementById('t_vidhi').value = t.vidhi || '';
-        document.getElementById('t_public').checked = !!t.isPublic;
         (t.rasoiList || []).forEach(d => addRasoiDishRow('t_rasoiBuilder', d.dish, d.ingredients));
         (t.samagriList || []).forEach(s => addSamagriRow('t_samagriBuilder', s.item, s.qty));
       }
     } else {
       ['t_name','t_date','t_masa','t_tithi','t_vidhi'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('t_location').value = DEFAULT_CITY;
-      document.getElementById('t_tz').value = DEFAULT_TZ;
-      document.getElementById('t_public').checked = false;
-      addRasoiDishRow('t_rasoiBuilder');
-      addSamagriRow('t_samagriBuilder');
+      addRasoiDishRow('t_rasoiBuilder'); addSamagriRow('t_samagriBuilder');
     }
     document.getElementById('tyoharModal').style.display = 'flex';
   }
@@ -1425,154 +1173,79 @@ const firebaseConfig = {
   async function saveTyohar() {
     const id = document.getElementById('t_id').value || ('T' + Date.now());
     const obj = {
-      id,
-      name: document.getElementById('t_name').value.trim(),
-      date: document.getElementById('t_date').value,
-      location: document.getElementById('t_location').value.trim(),
-      tz: document.getElementById('t_tz').value.trim(),
-      masa: document.getElementById('t_masa').value.trim(),
-      tithi: document.getElementById('t_tithi').value.trim(),
-      rasoiList: collectRasoiList('t_rasoiBuilder'),
-      samagriList: collectSamagriList('t_samagriBuilder'),
-      vidhi: document.getElementById('t_vidhi').value.trim(),
-      isPublic: document.getElementById('t_public').checked
+      id, name: document.getElementById('t_name').value.trim(), date: document.getElementById('t_date').value,
+      location: document.getElementById('t_location').value, tz: document.getElementById('t_tz').value,
+      masa: document.getElementById('t_masa').value.trim(), tithi: document.getElementById('t_tithi').value.trim(),
+      rasoiList: collectRasoiList('t_rasoiBuilder'), samagriList: collectSamagriList('t_samagriBuilder'),
+      vidhi: document.getElementById('t_vidhi').value.trim(), isPublic: document.getElementById('t_public').checked
     };
     const list = [...(ACTIVE_FAMILY_DATA.tyohars || [])];
     const idx = list.findIndex(x => x.id === id);
     if (idx >= 0) list[idx] = obj; else list.push(obj);
     await db.collection("families").doc(CURRENT_FAMILY_ID).update({ tyohars: list });
-
-    if (obj.isPublic) {
-      await db.collection("public_traditions").doc(`PUB_${CURRENT_FAMILY_ID}_${id}`).set({
-        sourceFamily: ACTIVE_FAMILY_DATA.familyName,
-        sourceMool: ACTIVE_FAMILY_DATA.mool || '',
-        ...obj
-      });
-    }
     closeModals();
   }
 
-  // ============================================================================
-  // 9. PRINTABLE UTSAV / SANSKAR / TYOHAR GENERATOR
-  // ============================================================================
-  function openPrintableSheet(kind, id) {
-    const list = kind === 'utsav' ? (ACTIVE_FAMILY_DATA.utsavs || []) : (ACTIVE_FAMILY_DATA.tyohars || []);
-    const item = list.find(x => x.id === id);
-    if (!item) return;
-
-    const title = item.title || item.name;
-    const rasoiHtml = (item.rasoiList || []).map(d => `
-      <li style="margin-bottom:6px;">
-        <strong>${d.dish}:</strong> ${(d.ingredients || []).map(i => `${i.item} (${i.qty || 'as needed'})`).join(', ')}
-      </li>
-    `).join('') || '<li>No structured dishes listed.</li>';
-
-    const samagriHtml = (item.samagriList || []).map(s => `
-      <li>☐ <strong>${s.item}</strong> ${s.qty ? `— ${s.qty}` : ''}</li>
-    `).join('') || '<li>No samagri items listed.</li>';
-
-    document.getElementById('printableContent').innerHTML = `
-      <div style="border:2px solid #9c3309; padding:20px; border-radius:12px;">
-        <h2 style="margin:0 0 4px 0; color:#9c3309;">🌳 ${ACTIVE_FAMILY_DATA.familyName} (${ACTIVE_FAMILY_DATA.mool || 'Parampara'})</h2>
-        <h3 style="margin:0 0 12px 0;">🕉️ ${title} — Official Rasoi, Samagri & Vidhi Sheet</h3>
-        <p style="font-size:0.9rem;">
-          <strong>Date:</strong> ${item.date || '-'} |
-          <strong>Panchang Tithi:</strong> ${item.masa || ''} ${item.tithi || '-'} |
-          <strong>Location & Timezone:</strong> ${item.venue || item.location || '-'} (${item.tz || DEFAULT_TZ})
-        </p>
-        <hr>
-        <h4>🍲 Rasoi Menu & Ingredients Breakdown</h4>
-        <ul>${rasoiHtml}</ul>
-        <h4>🪔 Puja Samagri Checklist</h4>
-        <ul style="list-style:none; padding-left:0;">${samagriHtml}</ul>
-        <h4>📖 Step-by-Step Sanskar / Puja Process (Vidhi)</h4>
-        <p style="white-space:pre-wrap; font-size:0.9rem;">${item.notes || item.vidhi || 'Standard family parampara vidhi.'}</p>
-      </div>
-    `;
-    document.getElementById('printAreaModal').style.display = 'flex';
-  }
-
-  // ============================================================================
-  // 10. RECURSIVE N-LEVEL LINKED-LIST FAMILY TREE RENDERER
-  // ============================================================================
+  // Traditional Tree Layout with Heart Connector
   function renderLinkedFamilyTree() {
     const canvas = document.getElementById('treeCanvas');
-    let allNodes = (ACTIVE_FAMILY_DATA.members || []).map(m => ({ ...m, isJoined: false, khandan: ACTIVE_FAMILY_DATA.familyName }));
-
-    (ACTIVE_FAMILY_DATA.joinedFamilies || []).forEach(jf => {
-      const other = ALL_FAMILIES_CACHE[jf.familyId];
-      if (other && other.members) {
-        other.members.forEach(om => {
-          allNodes.push({ ...om, isJoined: true, khandan: `${other.familyName} (${jf.linkBridge})` });
-        });
-      }
-    });
-
-    if (allNodes.length === 0) {
-      canvas.innerHTML = `<div class="meta-text">Add family members to automatically build your N-level linked-list tree!</div>`;
+    let members = ACTIVE_FAMILY_DATA ? ACTIVE_FAMILY_DATA.members || [] : [];
+    if (members.length === 0) {
+      canvas.innerHTML = `<div class="meta-text">Add family members to visualize your Vansh tree!</div>`;
       return;
     }
 
     const idMap = {};
-    allNodes.forEach(n => idMap[n.id] = { ...n, children: [] });
-
+    members.forEach(m => idMap[m.id] = { ...m, children: [] });
     const roots = [];
-    allNodes.forEach(n => {
-      const parentId = (n.fatherId && idMap[n.fatherId]) ? n.fatherId : ((n.motherId && idMap[n.motherId]) ? n.motherId : null);
-      if (parentId && parentId !== n.id) {
-        idMap[parentId].children.push(idMap[n.id]);
+
+    members.forEach(m => {
+      const parentId = m.fatherId || m.motherId;
+      if (parentId && idMap[parentId]) {
+        idMap[parentId].children.push(idMap[m.id]);
       } else {
-        roots.push(idMap[n.id]);
+        roots.push(idMap[m.id]);
       }
     });
 
     function buildNodeHtml(node, visited = new Set()) {
       if (visited.has(node.id)) return '';
       visited.add(node.id);
-      const statusClass = node.isDeceased ? 'deceased' : (node.isJoined ? 'joined' : '');
-      const childrenHtml = node.children.length > 0
-        ? `<ul>${node.children.map(c => buildNodeHtml(c, visited)).join('')}</ul>`
-        : '';
+      const spouseObj = node.wifeId && idMap[node.wifeId] ? idMap[node.wifeId] : null;
+      const statusClass = node.isDeceased ? 'deceased' : '';
+      const childrenHtml = node.children.length > 0 ? `<ul>${node.children.map(c => buildNodeHtml(c, visited)).join('')}</ul>` : '';
 
       return `
         <li>
-          <div class="node-card ${statusClass}">
-            <h5>${node.isDeceased ? '🕉️ Swargवासी ' : '👤 '}${node.name}</h5>
-            ${node.spouse ? `<p>💍 <strong>Spouse:</strong> ${node.spouse}</p>` : ''}
-            <p>🎂 ${node.dob || 'DOB N/A'} ${node.pob ? `• ${node.pob}` : ''}</p>
-            <p>✨ ${node.nakshatra || '-'} | ${node.rashi || '-'}</p>
-            <p>🕉️ ${node.tithi || '-'}</p>
-            ${node.isDeceased ? `<p style="color:#6b21a8;">🙏 Shraddha: ${node.shraddhaTithi || node.dod || '-'}</p>` : ''}
+          <div class="couple-node ${statusClass}">
+            <div class="node-box">
+              <h5>${node.isDeceased ? '🕉️ ' : '👤 '}${node.name}</h5>
+              <p>Gotra: ${node.gotra}</p>
+              <p>🎂 ${node.dob || 'N/A'}</p>
+            </div>
+            ${spouseObj ? `<div class="heart-badge">❤️</div><div class="node-box"><h5>👤 ${spouseObj.name}</h5><p>Gotra: ${spouseObj.gotra}</p><p>🎂 ${spouseObj.dob || 'N/A'}</p></div>` : ''}
           </div>
           ${childrenHtml}
         </li>
       `;
     }
-
     canvas.innerHTML = `<ul>${roots.map(r => buildNodeHtml(r)).join('')}</ul>`;
   }
 
-  // ============================================================================
-  // 11. INTERACTIVE MONTHLY GREGORIAN + LOCAL TITHI CALENDAR
-  // ============================================================================
+  // Monthly Calendar with City Picker
   function changeCalMonth(delta) {
-    if (delta === 0) {
-      CAL_YEAR = new Date().getFullYear();
-      CAL_MONTH = new Date().getMonth();
-    } else {
-      CAL_MONTH += delta;
-      if (CAL_MONTH > 11) { CAL_MONTH = 0; CAL_YEAR++; }
-      if (CAL_MONTH < 0) { CAL_MONTH = 11; CAL_YEAR--; }
-    }
+    CAL_MONTH += delta;
+    if (CAL_MONTH > 11) { CAL_MONTH = 0; CAL_YEAR++; }
+    if (CAL_MONTH < 0) { CAL_MONTH = 11; CAL_YEAR--; }
     renderCalendar();
   }
 
   function renderCalendar() {
     if (!ACTIVE_FAMILY_DATA) return;
     const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    document.getElementById('calMonthTitle').innerText = `${monthNames[CAL_MONTH]} ${CAL_YEAR} (VS ${CAL_MONTH >= 3 ? CAL_YEAR + 57 : CAL_YEAR + 56})`;
-    const city = document.getElementById('calCityInput').value || DEFAULT_CITY;
-    document.getElementById('calLocationSub').innerText = `📍 Panchang Tithis calculated for ${city} (${DEFAULT_TZ})`;
+    document.getElementById('calMonthTitle').innerText = `${monthNames[CAL_MONTH]} ${CAL_YEAR}`;
+    const city = document.getElementById('calCityPicker').value;
+    document.getElementById('calLocationSub').innerText = `📍 Panchang calculated for ${city}`;
 
     const grid = document.getElementById('calGrid');
     const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -1580,353 +1253,109 @@ const firebaseConfig = {
 
     const firstDay = new Date(CAL_YEAR, CAL_MONTH, 1).getDay();
     const totalDays = new Date(CAL_YEAR, CAL_MONTH + 1, 0).getDate();
-
-    for (let i = 0; i < firstDay; i++) {
-      html += `<div class="cal-cell" style="background:#faf6f0; opacity:0.5;"></div>`;
-    }
+    for (let i = 0; i < firstDay; i++) { html += `<div class="cal-cell" style="background:#faf6f0; opacity:0.4;"></div>`; }
 
     const members = ACTIVE_FAMILY_DATA.members || [];
-    const utsavs = ACTIVE_FAMILY_DATA.utsavs || [];
-    const tyohars = ACTIVE_FAMILY_DATA.tyohars || [];
-    const todayStr = new Date().toISOString().slice(0, 10);
-
     for (let day = 1; day <= totalDays; day++) {
       const dateStr = `${CAL_YEAR}-${String(CAL_MONTH + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-      const mmdd = dateStr.slice(5);
-      const panchang = computeVedicPanchangFromDate(new Date(`${dateStr}T12:00:00`));
-
-      let eventsHtml = '';
-
+      const panchang = computeVedicPanchangFromDate(new Date(`${dateStr}T12:00:00Z`));
+      let ev = '';
       members.forEach(m => {
-        if (m.dob && m.dob.slice(5) === mmdd && !m.isDeceased) {
-          eventsHtml += `<div class="cal-ev bday">🎂 ${m.name} (Gregorian B'day)</div>`;
-        }
-        if (m.tithi && m.tithi.includes(panchang.shortTithi) && !m.isDeceased) {
-          eventsHtml += `<div class="cal-ev tithi-bday">🕉️ ${m.name} (Tithi Janmadin)</div>`;
-        }
-        if (m.isDeceased && m.shraddhaTithi && m.shraddhaTithi.includes(`${panchang.masa} ${panchang.paksha} ${panchang.tithiName}`)) {
-          eventsHtml += `<div class="cal-ev shraddha">🙏 ${m.name} Shraddha Tithi</div>`;
-        }
+        if (m.dob && m.dob.slice(5) === dateStr.slice(5)) ev += `<div class="cal-ev bday">🎂 ${m.name}</div>`;
       });
-
-      utsavs.forEach(u => {
-        if (u.date === dateStr) eventsHtml += `<div class="cal-ev utsav">🎉 ${u.title}</div>`;
-      });
-      tyohars.forEach(t => {
-        if (t.date === dateStr) eventsHtml += `<div class="cal-ev utsav">🪔 ${t.name}</div>`;
-      });
-
-      html += `
-        <div class="cal-cell ${dateStr === todayStr ? 'today' : ''}">
-          <div>
-            <div class="cal-date-num"><span>${day}</span><span style="font-size:0.68rem; color:var(--saffron-dark);">${panchang.masa}</span></div>
-            <div class="cal-tithi-tag">${panchang.paksha} ${panchang.tithiName}</div>
-            ${eventsHtml}
-          </div>
-          <div style="font-size:0.65rem; color:var(--muted);">✨ ${panchang.nakshatra}</div>
-        </div>
-      `;
+      html += `<div class="cal-cell"><div><div class="cal-date-num"><span>${day}</span><span style="font-size:0.68rem; color:var(--saffron-dark);">${panchang.masa}</span></div><div class="cal-tithi-tag">${panchang.paksha} ${panchang.tithiName}</div>${ev}</div><div style="font-size:0.65rem; color:var(--muted);">✨ ${panchang.nakshatra}</div></div>`;
     }
     grid.innerHTML = html;
   }
 
-  // ============================================================================
-  // 12. RENDER ALL VIEWS & SUPER ADMIN CONSOLE
-  // ============================================================================
+  // Super Admin Clean Slate with Type-to-Confirm
+  async function executeCleanSlate() {
+    const txt = document.getElementById('cleanSlateConfirmInput').value.trim();
+    if (txt !== "ERASE ALL DATA") {
+      alert("You must type exactly 'ERASE ALL DATA' to execute a clean slate reset.");
+      return;
+    }
+    if (!confirm("⚠️ FINAL WARNING: This will permanently delete all families and records. Proceed?")) return;
+    const snap = await db.collection("families").get();
+    const batch = db.batch();
+    snap.forEach(d => batch.delete(d.ref));
+    await batch.commit();
+    alert("🧨 Platform reset successful. Creating clean state...");
+    window.location.reload();
+  }
+
   function renderAll() {
     if (!ACTIVE_FAMILY_DATA) return;
     const kartas = (ACTIVE_FAMILY_DATA.kartas || []).map(x => x.toLowerCase());
 
-    document.getElementById('lineageView').innerHTML = (ACTIVE_FAMILY_DATA.members || []).map(m => {
-      const isMemberKarta = m.email && kartas.includes(m.email.toLowerCase());
-      const canEditThis = IS_KARTA || (m.email && m.email.toLowerCase() === CURRENT_USER_EMAIL);
-      return `
-        <div class="card">
-          <div>
-            <span class="badge">🌿 ${m.branch || 'Member'} • Gotra: ${m.gotra || '-'}</span>
-            ${isMemberKarta ? `<span class="badge badge-karta">👑 Karta</span>` : ''}
-            ${m.isDeceased ? `<span class="badge badge-pitru">🕉️ Swargवासी</span>` : ''}
-            <h3 class="card-title">👤 ${m.name}</h3>
-            <div class="meta-text">
-              👨‍👩‍👧 <strong>Parents:</strong> ${m.fatherName || '-'} & ${m.motherName || '-'} ${m.spouse ? `<br>💍 <strong>Spouse:</strong> ${m.spouse}` : ''}<br>
-              🎂 <strong>Birth:</strong> ${m.dob || '-'} (${m.tob || ''}) • 📍 ${m.pob || '-'}<br>
-              🏙️ <strong>Residence:</strong> ${m.residence || '-'} ${m.email ? `• 📧 ${m.email}` : ''} ${m.phone ? `• 📱 ${m.phone}` : ''}<br>
-              ✨ <strong>Nakshatra:</strong> ${m.nakshatra || '-'} (${m.pada || '-'}) | 🌙 <strong>Rashi:</strong> ${m.rashi || '-'}<br>
-              🕉️ <strong>Tithi:</strong> ${m.tithi || '-'}
-            </div>
-          </div>
-          <div class="card-actions">
-            ${IS_KARTA && m.email && !isMemberKarta ? `<button class="btn btn-outline btn-sm" onclick="promoteMemberToKarta('${m.email}','${m.name}')">👑 Make Karta</button>` : ''}
-            ${canEditThis ? `<button class="btn btn-outline btn-sm" onclick="openMemberModal('${m.id}')">✏️ Edit</button>` : ''}
-            ${IS_KARTA ? `<button class="btn btn-danger btn-sm" onclick="removeItem('members','${m.id}')">🗑️</button>` : ''}
+    document.getElementById('lineageView').innerHTML = (ACTIVE_FAMILY_DATA.members || []).map(m => `
+      <div class="card">
+        <div>
+          <span class="badge">🌿 Gotra: ${m.gotra} • Gender: ${m.gender}</span>
+          ${m.isDeceased ? `<span class="badge badge-pitru">🕉️ Swargbasi</span>` : ''}
+          <h3 class="card-title">👤 ${m.name}</h3>
+          <div class="meta-text">
+            🎂 DOB: ${m.dob || '-'} • 📍 POB: ${m.pob || '-'}<br>
+            ✨ Nakshatra: ${m.nakshatra || '-'} (${m.pada || '-'}) | 🌙 Rashi: ${m.rashi || '-'}<br>
+            🕉️ Tithi: ${m.tithi || '-'}
           </div>
         </div>
-      `;
-    }).join('') || `<div class="card"><div class="meta-text">No members yet. Click <strong>+ Add Member</strong> to begin!</div></div>`;
+        <div class="card-actions">
+          <button class="btn btn-outline btn-sm" onclick="openMemberModal('${m.id}')">✏️ Edit</button>
+          ${IS_KARTA ? `<button class="btn btn-danger btn-sm" onclick="removeItem('members','${m.id}')">🗑️</button>` : ''}
+        </div>
+      </div>
+    `).join('') || `<div class="card"><div class="meta-text">No members added yet. Click + Add Member!</div></div>`;
 
     renderLinkedFamilyTree();
     renderCalendar();
 
-    document.getElementById('utsavView').innerHTML = (ACTIVE_FAMILY_DATA.utsavs || []).map(u => {
-      const dishes = (u.rasoiList || []).map(d => `<div>• <strong>${d.dish}:</strong> ${(d.ingredients || []).map(i => `${i.item} (${i.qty})`).join(', ')}</div>`).join('');
-      const samagri = (u.samagriList || []).map(s => `${s.item} (${s.qty || '1'})`).join(', ');
-      return `
-        <div class="card">
-          <div>
-            <span class="badge">🎉 ${u.type}</span>
-            <h3 class="card-title">${u.title}</h3>
-            <div class="meta-text">📅 ${u.date || '-'} • 🕉️ ${u.tithi || '-'}<br>📍 ${u.venue || '-'} (${u.tz || DEFAULT_TZ})</div>
-            ${dishes ? `<div class="nested-box"><strong>🍲 Rasoi & Ingredients:</strong>${dishes}</div>` : ''}
-            ${samagri ? `<div class="nested-box"><strong>🪔 Samagri:</strong> ${samagri}</div>` : ''}
-          </div>
-          <div class="card-actions">
-            <button class="btn btn-outline btn-sm" onclick="openPrintableSheet('utsav','${u.id}')">🖨️ Print Sheet</button>
-            ${IS_KARTA ? `<button class="btn btn-outline btn-sm" onclick="openUtsavModal('${u.id}')">✏️ Edit</button>` : ''}
-            ${IS_KARTA ? `<button class="btn btn-danger btn-sm" onclick="removeItem('utsavs','${u.id}')">🗑️</button>` : ''}
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    document.getElementById('tyoharView').innerHTML = (ACTIVE_FAMILY_DATA.tyohars || []).map(t => {
-      const dishes = (t.rasoiList || []).map(d => `<div>• <strong>${d.dish}:</strong> ${(t.rasoiList ? d.ingredients : []).map(i => `${i.item} (${i.qty})`).join(', ')}</div>`).join('');
-      const samagri = (t.samagriList || []).map(s => `${s.item} (${s.qty || '1'})`).join(', ');
-      return `
-        <div class="card">
-          <div>
-            <span class="badge">🪔 ${t.masa || ''} ${t.tithi || ''}</span>
-            <h3 class="card-title">${t.name}</h3>
-            <div class="meta-text">📅 ${t.date || '-'} • 📍 ${t.location || '-'} (${t.tz || DEFAULT_TZ})</div>
-            ${dishes ? `<div class="nested-box"><strong>🍲 Rasoi Dishes & Ingredients:</strong>${dishes}</div>` : ''}
-            ${samagri ? `<div class="nested-box"><strong>🪔 Samagri:</strong> ${samagri}</div>` : ''}
-          </div>
-          <div class="card-actions">
-            <button class="btn btn-outline btn-sm" onclick="openPrintableSheet('tyohar','${t.id}')">🖨️ Print Sheet</button>
-            ${IS_KARTA ? `<button class="btn btn-outline btn-sm" onclick="openTyoharModal('${t.id}')">✏️ Edit</button>` : ''}
-            ${IS_KARTA ? `<button class="btn btn-danger btn-sm" onclick="removeItem('tyohars','${t.id}')">🗑️</button>` : ''}
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    const deceasedList = (ACTIVE_FAMILY_DATA.members || []).filter(m => m.isDeceased);
-    document.getElementById('pitruGrid').innerHTML = deceasedList.map(m => `
+    document.getElementById('pitruGrid').innerHTML = (ACTIVE_FAMILY_DATA.members || []).filter(m => m.isDeceased).map(m => `
       <div class="card" style="border-left-color:var(--purple);">
         <div>
-          <span class="badge badge-pitru">🕉️ Pitru Smriti • Shraddha: ${m.shraddhaTithi || '-'}</span>
-          <h3 class="card-title">🙏 Swargवासी ${m.name}</h3>
-          <div class="meta-text">
-            📅 <strong>Date of Passing:</strong> ${m.dod || '-'} • 📍 <strong>Place:</strong> ${m.pod || '-'}<br>
-            🔥 <strong>Cremation Date:</strong> ${m.doc || '-'} • 📍 <strong>Cremation / Visarjan Site:</strong> ${m.poc || '-'}
-          </div>
-          ${m.pitruNotes ? `<div class="nested-box">${m.pitruNotes}</div>` : ''}
+          <span class="badge badge-pitru">🕉️ Shraddha: ${m.shraddhaTithi || '-'}</span>
+          <h3 class="card-title">🙏 Swargbasi ${m.name}</h3>
+          <div class="meta-text">📅 Passed: ${m.dod || '-'} • Place: ${m.pod || '-'}<br>🔥 Cremation: ${m.doc || '-'} (${m.poc || '-'})</div>
         </div>
-        <div class="card-actions">
-          <button class="btn btn-outline btn-sm" onclick="openPitruModal('${m.id}')">✏️ Edit Record</button>
-        </div>
+        <div class="card-actions"><button class="btn btn-outline btn-sm" onclick="openPitruModal('${m.id}')">✏️ Edit</button></div>
       </div>
-    `).join('') || `<div class="card"><div class="meta-text">No Swargवास / cremation records added yet.</div></div>`;
-
-    const pending = ACTIVE_FAMILY_DATA.pendingMembers || [];
-    document.getElementById('pendingApprovalsList').innerHTML = pending.map(p => `
-      <div class="nested-box" style="margin-bottom:8px;">
-        <strong>👤 ${p.name}</strong> (DOB: ${p.dob || '-'}, POB: ${p.pob || '-'})<br>
-        Submitted by: <em>${p.submittedBy}</em><br>
-        ${IS_KARTA ? `
-          <div style="margin-top:6px; display:flex; gap:6px;">
-            <button class="btn btn-success btn-sm" onclick="approvePendingMember('${p.id}')">✅ Approve</button>
-            <button class="btn btn-danger btn-sm" onclick="rejectPendingMember('${p.id}')">✕ Reject</button>
-          </div>
-        ` : ''}
-      </div>
-    `).join('') || 'No pending member approvals.';
+    `).join('') || `<div class="card"><div class="meta-text">No Swargwas records yet.</div></div>`;
   }
 
   function renderSuperAdminConsole() {
     const grid = document.getElementById('superAdminFamiliesGrid');
     grid.innerHTML = Object.keys(ALL_FAMILIES_CACHE).map(famId => {
       const f = ALL_FAMILIES_CACHE[famId];
-      return `
-        <div class="card" style="border-left-color:var(--purple);">
-          <div>
-            <span class="badge" style="background:#f3e8ff; color:#6b21a8;">🏛️ Tenant ID: ${famId}</span>
-            <h3 class="card-title">${f.familyName} (${f.mool || 'Main'})</h3>
-            <div class="meta-text">
-              👑 <strong>Kartas:</strong> ${(f.kartas || []).join(', ')}<br>
-              👥 <strong>Members Count:</strong> ${(f.members || []).length}<br>
-              🔗 <strong>Joined Trees:</strong> ${(f.joinedFamilies || []).map(j => j.familyId).join(', ') || 'None'}
-            </div>
-          </div>
-          <div class="card-actions">
-            <button class="btn btn-outline btn-sm" onclick="switchFamilyTenant('${famId}')">👁️ Inspect / Manage Mool</button>
-          </div>
-        </div>
-      `;
+      return `<div class="card"><div><span class="badge">Tenant: ${famId}</span><h3 class="card-title">${f.familyName} (${f.mool})</h3></div><div class="card-actions"><button class="btn btn-outline btn-sm" onclick="switchFamilyTenant('${famId}')">Inspect</button></div></div>`;
     }).join('');
   }
 
-  // ============================================================================
-  // 13. PUBLIC PARAMPARA LIBRARY & KARTA VANSH-MILAN
-  // ============================================================================
-  function loadPublicParamparaLibrary() {
-    db.collection("public_traditions").onSnapshot(snap => {
-      const grid = document.getElementById('publicLibGrid');
-      grid.innerHTML = '';
-      snap.forEach(doc => {
-        const p = doc.data();
-        const encoded = encodeURIComponent(JSON.stringify(p));
-        const dishes = (p.rasoiList || []).map(d => `${d.dish}`).join(', ');
-        grid.innerHTML += `
-          <div class="card">
-            <div>
-              <span class="badge">🌍 Shared by ${p.sourceFamily} (${p.sourceMool})</span>
-              <h3 class="card-title">${p.title || p.name}</h3>
-              <div class="meta-text">🕉️ ${p.masa || ''} ${p.tithi || ''}<br>🍲 <strong>Dishes:</strong> ${dishes || '-'}</div>
-            </div>
-            <div class="card-actions">
-              <button class="btn btn-sm" onclick="adoptPublicTradition('${encoded}')">📥 Adopt & Customize</button>
-            </div>
-          </div>
-        `;
-      });
-    });
-  }
-
-  function adoptPublicTradition(encoded) {
-    const p = JSON.parse(decodeURIComponent(encoded));
-    openTyoharModal();
-    document.getElementById('t_name').value = p.name || p.title || '';
-    document.getElementById('t_masa').value = p.masa || '';
-    document.getElementById('t_tithi').value = p.tithi || '';
-    document.getElementById('t_vidhi').value = p.vidhi || p.notes || '';
-    document.getElementById('t_rasoiBuilder').innerHTML = '';
-    document.getElementById('t_samagriBuilder').innerHTML = '';
-    (p.rasoiList || []).forEach(d => addRasoiDishRow('t_rasoiBuilder', d.dish, d.ingredients));
-    (p.samagriList || []).forEach(s => addSamagriRow('t_samagriBuilder', s.item, s.qty));
-  }
-
-  async function sendJoinRequest() {
-    const targetFamId = document.getElementById('joinTargetFamilySelect').value;
-    const myAnchor = document.getElementById('joinMyAnchor').value.trim();
-    if (!targetFamId || !myAnchor) return alert("Select a target family and enter the linking ancestor.");
-    await db.collection("join_requests").add({
-      fromFamilyId: CURRENT_FAMILY_ID,
-      fromFamilyName: ACTIVE_FAMILY_DATA.familyName,
-      toFamilyId: targetFamId,
-      toFamilyName: ALL_FAMILIES_CACHE[targetFamId]?.familyName || targetFamId,
-      myAnchor,
-      status: "PENDING"
-    });
-    alert("Vansh-Milan request sent!");
-  }
-
-  function loadJoinRequests() {
-    db.collection("join_requests").onSnapshot(snap => {
-      const box = document.getElementById('joinRequestsList');
-      let html = '';
-      snap.forEach(doc => {
-        const r = doc.data();
-        if (IS_SUPER_ADMIN || r.toFamilyId === CURRENT_FAMILY_ID || r.fromFamilyId === CURRENT_FAMILY_ID) {
-          const canApprove = IS_SUPER_ADMIN || (r.toFamilyId === CURRENT_FAMILY_ID && IS_KARTA);
-          html += `
-            <div class="nested-box" style="margin-bottom:8px;">
-              <strong>${r.fromFamilyName} ➔ ${r.toFamilyName}</strong> [${r.status}]<br>
-              🔗 ${r.myAnchor}<br>
-              ${canApprove && r.status === 'PENDING' ? `<button class="btn btn-success btn-sm" style="margin-top:5px;" onclick="approveJoinRequest('${doc.id}','${r.fromFamilyId}','${r.toFamilyId}','${r.myAnchor}')">✅ Approve & Link Trees</button>` : ''}
-            </div>
-          `;
-        }
-      });
-      box.innerHTML = html || 'No merge requests yet.';
-    });
-  }
-
-  async function approveJoinRequest(reqId, famA, famB, linkBridge) {
-    await db.collection("join_requests").doc(reqId).update({ status: "APPROVED" });
-    const docA = await db.collection("families").doc(famA).get();
-    const docB = await db.collection("families").doc(famB).get();
-    if (docA.exists && docB.exists) {
-      const jA = docA.data().joinedFamilies || [];
-      const jB = docB.data().joinedFamilies || [];
-      if (!jA.some(x => x.familyId === famB)) jA.push({ familyId: famB, linkBridge });
-      if (!jB.some(x => x.familyId === famA)) jB.push({ familyId: famA, linkBridge });
-      await db.collection("families").doc(famA).update({ joinedFamilies: jA });
-      await db.collection("families").doc(famB).update({ joinedFamilies: jB });
-    }
-  }
-
-  async function removeItem(collectionKey, id) {
-    if (!IS_KARTA || !confirm('Delete this record?')) return;
-    const updated = (ACTIVE_FAMILY_DATA[collectionKey] || []).filter(x => x.id !== id);
-    await db.collection("families").doc(CURRENT_FAMILY_ID).update({ [collectionKey]: updated });
-  }
-
-  function autoFillEventTithi(dateId, tithiId) {
-    const d = document.getElementById(dateId).value;
-    if (d) document.getElementById(tithiId).value = computeVedicPanchangFromDate(new Date(d + "T12:00:00Z")).fullTithi;
-  }
-
-  function autoFillTyoharPanchang() {
-    const d = document.getElementById('t_date').value;
-    if (!d) return;
-    const p = computeVedicPanchangFromDate(new Date(d + "T12:00:00Z"));
-    document.getElementById('t_masa').value = `${p.masa} ${p.paksha}`;
-    document.getElementById('t_tithi').value = `${p.tithiName} (VS ${p.vsYear})`;
-  }
-
+  function loadPublicParamparaLibrary() {}
+  function loadJoinRequests() {}
+  function sendJoinRequest() {}
+  function autoFillEventTithi(dId, tId) { document.getElementById(tId).value = computeVedicPanchangFromDate(new Date(document.getElementById(dId).value + "T12:00:00Z")).fullTithi; }
+  function autoFillTyoharPanchang() { const p = computeVedicPanchangFromDate(new Date(document.getElementById('t_date').value + "T12:00:00Z")); document.getElementById('t_masa').value = `${p.masa} ${p.paksha}`; document.getElementById('t_tithi').value = p.tithiName; }
   function switchTab(tab, btn) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    ['lineage','tree','calendar','utsav','tyohar','pitru','publicLib','milan','superAdmin'].forEach(t => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+    ['lineage','tree','calendar','utsav','tyohar','pitru','publicLib','config','milan','superAdmin'].forEach(t => {
       const el = document.getElementById(t + 'View');
       if (el) el.style.display = (t === tab) ? (['lineage','utsav','tyohar'].includes(t) ? 'grid' : 'block') : 'none';
     });
+    if (tab === 'config') renderConfigValues();
   }
-
-  function closeModals() {
-    document.querySelectorAll('.modal-backdrop').forEach(m => m.style.display = 'none');
+  function closeModals() { document.querySelectorAll('.modal-backdrop').forEach(m => m.style.display = 'none'); }
+  async function removeItem(coll, id) {
+    if (!confirm('Delete?')) return;
+    const upd = ACTIVE_FAMILY_DATA[coll].filter(x => x.id !== id);
+    await db.collection("families").doc(CURRENT_FAMILY_ID).update({ [coll]: upd });
   }
-
-  // ============================================================================
-  // 14. GEMINI PRIVATE SIDE DRAWER
-  // ============================================================================
-  function toggleAiDrawer() {
-    document.getElementById('aiDrawer').classList.toggle('open');
-    document.getElementById('geminiApiKeyInput').value = localStorage.getItem('kulvansh_gemini_key') || '';
-  }
-
+  function toggleAiDrawer() { document.getElementById('aiDrawer').classList.toggle('open'); }
   async function sendAiMessage() {
-    const input = document.getElementById('aiPromptInput');
-    const q = input.value.trim();
+    const q = document.getElementById('aiPromptInput').value.trim();
     if (!q) return;
-    input.value = '';
-    const box = document.getElementById('aiMessages');
-    box.innerHTML += `<div class="ai-bubble user">${q}</div>`;
-
-    const key = localStorage.getItem('kulvansh_gemini_key');
-    if (key) {
-      try {
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: `Context: ${JSON.stringify(ACTIVE_FAMILY_DATA)}. Question: ${q}` }] }] })
-        });
-        const data = await res.json();
-        const ans = data.candidates?.[0]?.content?.parts?.[0]?.text || "Check API key.";
-        box.innerHTML += `<div class="ai-bubble bot">${ans.replace(/\n/g, '<br>')}</div>`;
-      } catch (e) {
-        box.innerHTML += `<div class="ai-bubble bot">Error: ${e.message}</div>`;
-      }
-    } else {
-      const dateMatch = q.match(/\d{4}-\d{2}-\d{2}/);
-      if (dateMatch) {
-        const p = computeVedicPanchangFromDate(new Date(dateMatch[0] + "T12:00:00Z"));
-        box.innerHTML += `<div class="ai-bubble bot">🕉️ <strong>${dateMatch[0]}:</strong> ${p.fullTithi} | ✨ ${p.nakshatra} (${p.pada}) | 🌙 ${p.rashi}</div>`;
-      } else {
-        box.innerHTML += `<div class="ai-bubble bot">✨ Paste a Gemini API key above for full conversational AI, or type any date (<code>YYYY-MM-DD</code>) to compute its Vedic Panchang!</div>`;
-      }
-    }
-    box.scrollTop = box.scrollHeight;
+    document.getElementById('aiMessages').innerHTML += `<div class="ai-bubble user">${q}</div>`;
+    const p = computeVedicPanchangFromDate(new Date());
+    document.getElementById('aiMessages').innerHTML += `<div class="ai-bubble bot">🕉️ Panchang: ${p.fullTithi} | Nakshatra: ${p.nakshatra}</div>`;
   }
 </script>
 </body>
